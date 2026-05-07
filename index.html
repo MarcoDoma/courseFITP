@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>FITP Padel Studio</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Padel Studio">
+<meta name="theme-color" content="#7c6ef5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -60,11 +64,11 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow:hidden;transition:background .2s,color .2s}
 .app{display:flex;flex-direction:column;height:100vh;max-width:480px;margin:0 auto;position:relative}
-.screen{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:calc(72px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+.screen{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 .screen::-webkit-scrollbar{display:none}
 
 /* NAV */
-.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--bg2);border-top:0.5px solid var(--border);display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom);box-shadow:var(--shadow)}
+.nav{width:100%;background:var(--bg2);border-top:0.5px solid var(--border);display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom);box-shadow:var(--shadow)}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 8px;border:none;background:transparent;color:var(--text3);font-family:inherit;cursor:pointer;transition:color .15s;min-height:52px}
 .nav-btn.active{color:var(--accent)}
 .nav-icon{font-size:21px;line-height:1}
@@ -1025,6 +1029,99 @@ load();
 applyTheme();
 renderHome();
 renderNumeri();
+
+// Generate app icon via canvas
+(function(){
+  const s = 512;
+  const cv = document.createElement('canvas');
+  cv.width = s; cv.height = s;
+  const c = cv.getContext('2d');
+
+  // Background rounded square with gradient
+  const bg = c.createLinearGradient(0, 0, s, s);
+  bg.addColorStop(0, '#1a1825');
+  bg.addColorStop(1, '#0f0f11');
+  c.fillStyle = bg;
+  c.beginPath();
+  c.roundRect(0, 0, s, s, s * 0.22);
+  c.fill();
+
+  // Purple glow circle behind racket
+  const glow = c.createRadialGradient(s/2, s*0.42, 0, s/2, s*0.42, s*0.38);
+  glow.addColorStop(0, 'rgba(124,110,245,0.35)');
+  glow.addColorStop(1, 'rgba(124,110,245,0)');
+  c.fillStyle = glow;
+  c.fillRect(0, 0, s, s);
+
+  // Racket head (outer white ellipse)
+  const cx = s / 2, hcy = s * 0.37, hrx = s * 0.24, hry = s * 0.28;
+  c.fillStyle = 'rgba(255,255,255,0.95)';
+  c.beginPath();
+  c.ellipse(cx, hcy, hrx, hry, 0, 0, Math.PI * 2);
+  c.fill();
+
+  // Racket head inner (accent colored, slightly smaller = string grid effect)
+  c.fillStyle = '#2a2440';
+  c.beginPath();
+  c.ellipse(cx, hcy, hrx - s*0.025, hry - s*0.025, 0, 0, Math.PI * 2);
+  c.fill();
+
+  // String grid lines on racket head
+  c.strokeStyle = 'rgba(255,255,255,0.85)';
+  c.lineWidth = s * 0.018;
+  c.lineCap = 'round';
+  const lineSpacing = s * 0.072;
+  // Vertical strings
+  for (let dx = -2; dx <= 2; dx++) {
+    const lx = cx + dx * lineSpacing;
+    const dy = Math.sqrt(Math.max(0, 1 - Math.pow((lx-cx)/hrx, 2))) * hry;
+    c.beginPath();
+    c.moveTo(lx, hcy - dy + s*0.02);
+    c.lineTo(lx, hcy + dy - s*0.02);
+    c.stroke();
+  }
+  // Horizontal strings
+  for (let dy2 = -2; dy2 <= 2; dy2++) {
+    const ly = hcy + dy2 * lineSpacing;
+    const dx2 = Math.sqrt(Math.max(0, 1 - Math.pow((ly-hcy)/hry, 2))) * hrx;
+    c.beginPath();
+    c.moveTo(cx - dx2 + s*0.02, ly);
+    c.lineTo(cx + dx2 - s*0.02, ly);
+    c.stroke();
+  }
+
+  // Racket handle
+  const hndW = s * 0.1, hndX = cx - hndW/2, hndY = hcy + hry - s*0.015, hndH = s * 0.26;
+  c.fillStyle = 'rgba(255,255,255,0.95)';
+  c.beginPath();
+  c.roundRect(hndX, hndY, hndW, hndH, s * 0.025);
+  c.fill();
+
+  // Handle grip tape lines
+  c.strokeStyle = 'rgba(124,110,245,0.6)';
+  c.lineWidth = s * 0.012;
+  for (let i = 0; i < 4; i++) {
+    const ly2 = hndY + s*0.06 + i * s*0.045;
+    c.beginPath();
+    c.moveTo(hndX + s*0.01, ly2);
+    c.lineTo(hndX + hndW - s*0.01, ly2);
+    c.stroke();
+  }
+
+  // Bottom cap of handle
+  c.fillStyle = '#7c6ef5';
+  c.beginPath();
+  c.roundRect(hndX + s*0.005, hndY + hndH - s*0.04, hndW - s*0.01, s*0.045, s*0.02);
+  c.fill();
+
+  const url = cv.toDataURL('image/png');
+  const favicon = document.createElement('link');
+  favicon.rel = 'icon'; favicon.type = 'image/png'; favicon.href = url;
+  document.head.appendChild(favicon);
+  const ati = document.createElement('link');
+  ati.rel = 'apple-touch-icon'; ati.href = url;
+  document.head.appendChild(ati);
+})();
 </script>
 </body>
 </html>
