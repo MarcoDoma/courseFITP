@@ -2,17 +2,18 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>FITP Padel — Studio Istruttore 1° Livello</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FITP Padel Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #0f0f11;
   --bg2: #17171b;
   --bg3: #1f1f25;
+  --bg4: #27272e;
   --border: rgba(255,255,255,0.08);
-  --border2: rgba(255,255,255,0.14);
+  --border2: rgba(255,255,255,0.15);
   --text: #f0eff4;
   --text2: #9896a8;
   --text3: #5e5c6e;
@@ -22,392 +23,452 @@
   --accent-border: rgba(124,110,245,0.3);
   --green: #34d399;
   --green-bg: rgba(52,211,153,0.1);
+  --green-border: rgba(52,211,153,0.3);
   --red: #f87171;
   --red-bg: rgba(248,113,113,0.1);
+  --red-border: rgba(248,113,113,0.3);
   --amber: #fbbf24;
-  --radius: 12px;
-  --radius-sm: 8px;
+  --amber-bg: rgba(251,191,36,0.1);
+  --radius: 14px;
+  --radius-sm: 9px;
+  --shadow: none;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow: hidden; }
-
-/* LAYOUT */
-.app { display: flex; flex-direction: column; height: 100vh; max-width: 480px; margin: 0 auto; position: relative; }
-.screen { flex: 1; overflow-y: auto; overflow-x: hidden; padding-bottom: 80px; }
-.screen::-webkit-scrollbar { display: none; }
+[data-theme="light"] {
+  --bg: #f4f3f8;
+  --bg2: #ffffff;
+  --bg3: #ededf2;
+  --bg4: #e4e3eb;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.14);
+  --text: #1a1825;
+  --text2: #6b6880;
+  --text3: #a09db8;
+  --accent: #6c5ce7;
+  --accent2: #6c5ce7;
+  --accent-bg: rgba(108,92,231,0.08);
+  --accent-border: rgba(108,92,231,0.25);
+  --green: #059669;
+  --green-bg: rgba(5,150,105,0.08);
+  --green-border: rgba(5,150,105,0.25);
+  --red: #dc2626;
+  --red-bg: rgba(220,38,38,0.08);
+  --red-border: rgba(220,38,38,0.25);
+  --amber: #d97706;
+  --amber-bg: rgba(217,119,6,0.08);
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow:hidden;transition:background .2s,color .2s}
+.app{display:flex;flex-direction:column;height:100vh;max-width:480px;margin:0 auto;position:relative}
+.screen{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:72px;-webkit-overflow-scrolling:touch}
+.screen::-webkit-scrollbar{display:none}
 
 /* NAV */
-.nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--bg2); border-top: 0.5px solid var(--border); display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
-.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px 8px; border: none; background: transparent; color: var(--text3); font-size: 10px; font-family: inherit; cursor: pointer; transition: color .2s; }
-.nav-btn.active { color: var(--accent2); }
-.nav-icon { font-size: 20px; line-height: 1; }
-.nav-label { font-size: 10px; font-weight: 500; }
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--bg2);border-top:0.5px solid var(--border);display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom);box-shadow:var(--shadow)}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 8px;border:none;background:transparent;color:var(--text3);font-family:inherit;cursor:pointer;transition:color .15s;min-height:52px}
+.nav-btn.active{color:var(--accent)}
+.nav-icon{font-size:21px;line-height:1}
+.nav-label{font-size:10px;font-weight:500}
 
-/* HEADER */
-.page-header { padding: 20px 16px 12px; position: sticky; top: 0; background: var(--bg); z-index: 50; border-bottom: 0.5px solid var(--border); }
-.page-title { font-size: 22px; font-weight: 600; letter-spacing: -0.3px; }
-.page-sub { font-size: 13px; color: var(--text2); margin-top: 2px; }
+/* PAGE HEADER */
+.page-header{padding:18px 16px 12px;background:var(--bg);position:sticky;top:0;z-index:100;border-bottom:0.5px solid var(--border)}
+.page-header-row{display:flex;align-items:center;justify-content:space-between}
+.page-title{font-size:22px;font-weight:600;letter-spacing:-.3px}
+.page-sub{font-size:13px;color:var(--text2);margin-top:2px}
+.theme-toggle{width:38px;height:38px;border-radius:50%;border:0.5px solid var(--border2);background:var(--bg3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:background .15s}
 
 /* HOME */
-.home-hero { padding: 24px 16px 20px; background: linear-gradient(135deg, var(--bg2) 0%, #1a1728 100%); border-bottom: 0.5px solid var(--border); }
-.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-bg); border: 0.5px solid var(--accent-border); border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 500; color: var(--accent2); margin-bottom: 12px; }
-.hero-title { font-size: 26px; font-weight: 600; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 6px; }
-.hero-sub { font-size: 13px; color: var(--text2); line-height: 1.5; }
-.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 14px 16px; }
-.stat-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 12px; text-align: center; }
-.stat-val { font-size: 24px; font-weight: 600; color: var(--accent2); font-family: 'DM Mono', monospace; }
-.stat-lbl { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.home-hero{padding:20px 16px 16px;background:var(--bg2);border-bottom:0.5px solid var(--border)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-bg);border:0.5px solid var(--accent-border);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:500;color:var(--accent2);margin-bottom:10px}
+.hero-title{font-size:26px;font-weight:600;letter-spacing:-.5px;line-height:1.2;margin-bottom:5px}
+.hero-sub{font-size:13px;color:var(--text2);line-height:1.5}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 16px}
+.stat-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-val{font-size:22px;font-weight:600;color:var(--accent2);font-family:'DM Mono',monospace}
+.stat-lbl{font-size:11px;color:var(--text2);margin-top:2px}
 
-/* PROGRESS OVERVIEW */
-.prog-section { padding: 0 16px 16px; }
-.section-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .8px; margin: 16px 0 10px; }
-.prog-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 8px; }
-.prog-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.prog-name { font-size: 14px; font-weight: 500; }
-.prog-pct { font-size: 13px; font-weight: 600; color: var(--accent2); font-family: 'DM Mono', monospace; }
-.prog-bar-wrap { height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
-.prog-bar { height: 100%; background: var(--accent); border-radius: 2px; transition: width .4s; }
-.prog-bar.done { background: var(--green); }
-.prog-meta { font-size: 11px; color: var(--text3); margin-top: 6px; }
+/* SECTION LABEL */
+.section-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin:16px 16px 8px}
 
-/* PLAN */
-.plan-list { padding: 0 16px; }
-.day-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: border-color .15s; }
-.day-card:active { border-color: var(--accent-border); }
-.day-pill { width: 36px; height: 36px; border-radius: 50%; background: var(--accent-bg); border: 0.5px solid var(--accent-border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--accent2); flex-shrink: 0; font-family: 'DM Mono', monospace; }
-.day-pill.done { background: var(--green-bg); border-color: rgba(52,211,153,0.3); color: var(--green); }
-.day-info { flex: 1; min-width: 0; }
-.day-n { font-size: 13px; font-weight: 500; }
-.day-topics { font-size: 12px; color: var(--text2); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.day-method { font-size: 11px; color: var(--accent2); margin-top: 3px; }
-.day-check { font-size: 18px; }
+/* PROGRESS CARDS */
+.prog-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:13px 15px;margin:0 16px 8px;box-shadow:var(--shadow)}
+.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.prog-name{font-size:14px;font-weight:500}
+.prog-pct{font-size:13px;font-weight:600;color:var(--accent2);font-family:'DM Mono',monospace}
+.prog-bar-wrap{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-bar{height:100%;background:var(--accent);border-radius:3px;transition:width .4s}
+.prog-bar.done{background:var(--green)}
+.prog-meta{font-size:11px;color:var(--text3);margin-top:6px}
 
-/* SEZIONI */
-.search-wrap { padding: 12px 16px; background: var(--bg); position: sticky; top: 0; z-index: 40; border-bottom: 0.5px solid var(--border); }
-.search-input { width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text); font-size: 14px; font-family: inherit; outline: none; }
-.search-input::placeholder { color: var(--text3); }
-.sections-list { padding: 8px 16px; }
-.sec-item { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 13px 14px; margin-bottom: 8px; cursor: pointer; transition: border-color .15s; display: flex; align-items: center; gap: 12px; }
-.sec-item:active { border-color: var(--accent-border); }
-.sec-icon-wrap { width: 38px; height: 38px; border-radius: var(--radius-sm); background: var(--accent-bg); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-.sec-info { flex: 1; min-width: 0; }
-.sec-name { font-size: 14px; font-weight: 500; }
-.sec-progress { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
-.sec-bar { flex: 1; height: 3px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
-.sec-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width .3s; }
-.sec-pct { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; width: 28px; text-align: right; }
-.sec-arrow { color: var(--text3); font-size: 16px; }
-
-/* DETAIL */
-.detail-header { background: var(--bg); padding: 12px 16px 14px; position: sticky; top: 0; z-index: 50; border-bottom: 0.5px solid var(--border); }
-.back-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--accent2); cursor: pointer; border: none; background: none; font-family: inherit; padding: 0; margin-bottom: 8px; }
-.detail-title-row { display: flex; align-items: center; gap: 8px; }
-.detail-icon { font-size: 20px; }
-.detail-title { font-size: 18px; font-weight: 600; }
-.detail-meta { font-size: 12px; color: var(--text2); margin-top: 3px; }
-.qa-list { padding: 12px 16px; }
-.qa-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; transition: border-color .2s; }
-.qa-card.read { border-color: rgba(52,211,153,0.25); }
-.qa-q { padding: 14px 14px 0; font-size: 14px; font-weight: 500; line-height: 1.5; color: var(--text); }
-.qa-num { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; margin-bottom: 4px; }
-.qa-ans-wrap { margin: 10px 14px; background: var(--accent-bg); border: 0.5px solid var(--accent-border); border-radius: var(--radius-sm); padding: 10px 12px; display: flex; align-items: flex-start; gap: 8px; }
-.qa-check { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
-.qa-ans-text { font-size: 13px; font-weight: 500; color: var(--accent2); line-height: 1.4; }
-.qa-exp { padding: 0 14px 14px; font-size: 13px; color: var(--text2); line-height: 1.6; }
-.qa-exp::before { content: '💡 '; }
-.mark-read-btn { display: block; width: calc(100% - 28px); margin: 0 14px 14px; padding: 9px; background: transparent; border: 0.5px solid var(--border2); border-radius: var(--radius-sm); color: var(--text3); font-size: 12px; font-family: inherit; cursor: pointer; text-align: center; transition: all .2s; }
-.mark-read-btn.done { background: var(--green-bg); border-color: rgba(52,211,153,0.3); color: var(--green); }
-
-/* FLASHCARD */
-.flash-wrap { padding: 14px 16px; }
-.flash-filter { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 14px; }
-.flash-filter::-webkit-scrollbar { display: none; }
-.chip { padding: 6px 12px; border-radius: 20px; border: 0.5px solid var(--border2); font-size: 12px; font-weight: 500; cursor: pointer; background: var(--bg2); color: var(--text2); white-space: nowrap; transition: all .15s; }
-.chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-.flash-prog-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.flash-counter { font-size: 12px; color: var(--text3); font-family: 'DM Mono', monospace; }
-.flash-score { font-size: 12px; color: var(--text2); }
-.flash-prog-bar { height: 3px; background: var(--bg3); border-radius: 2px; margin-bottom: 14px; overflow: hidden; }
-.flash-prog-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width .3s; }
-.flash-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 16px; min-height: 220px; padding: 20px; cursor: pointer; transition: border-color .2s; display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 12px; }
-.flash-card.flipped { border-color: var(--accent-border); }
-.flash-section-tag { font-size: 11px; color: var(--accent2); font-weight: 500; margin-bottom: 10px; }
-.flash-question { font-size: 16px; font-weight: 500; line-height: 1.5; color: var(--text); }
-.flash-tap-hint { font-size: 12px; color: var(--text3); margin-top: 12px; display: flex; align-items: center; gap: 4px; }
-.flash-answer-wrap { display: none; margin-top: 14px; padding-top: 14px; border-top: 0.5px solid var(--border2); }
-.flash-answer-wrap.show { display: block; }
-.flash-answer { font-size: 14px; font-weight: 600; color: var(--green); margin-bottom: 8px; }
-.flash-explain { font-size: 13px; color: var(--text2); line-height: 1.6; }
-.flash-btns { display: flex; gap: 8px; }
-.flash-btn { flex: 1; padding: 12px; border-radius: var(--radius-sm); border: 0.5px solid; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 6px; transition: opacity .15s; }
-.flash-btn:active { opacity: .7; }
-.fbtn-bad { background: var(--red-bg); border-color: rgba(248,113,113,0.3); color: var(--red); }
-.fbtn-good { background: var(--green-bg); border-color: rgba(52,211,153,0.3); color: var(--green); }
-.flash-reveal-btn { width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text2); font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; margin-bottom: 12px; transition: border-color .2s; }
-.flash-reveal-btn:active { border-color: var(--accent-border); }
-.session-summary { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; display: none; }
-.summary-icon { font-size: 40px; margin-bottom: 8px; }
-.summary-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
-.summary-sub { font-size: 13px; color: var(--text2); margin-bottom: 14px; }
-.summary-stats { display: flex; justify-content: center; gap: 24px; margin-bottom: 14px; }
-.summary-stat { text-align: center; }
-.summary-stat-val { font-size: 22px; font-weight: 600; font-family: 'DM Mono', monospace; }
-.summary-stat-lbl { font-size: 11px; color: var(--text2); }
-.btn-primary { padding: 12px 24px; background: var(--accent); border: none; border-radius: var(--radius-sm); color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
-
-/* NUMERI */
-.nums-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 14px 16px; }
-.num-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px; }
-.num-val { font-size: 26px; font-weight: 600; color: var(--accent2); font-family: 'DM Mono', monospace; margin-bottom: 4px; }
-.num-lbl { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-.num-ctx { font-size: 11px; color: var(--text3); line-height: 1.4; }
+/* DAY CARDS */
+.day-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin:0 16px 8px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:var(--shadow)}
+.day-card:active{opacity:.8}
+.day-pill{width:38px;height:38px;border-radius:50%;background:var(--accent-bg);border:0.5px solid var(--accent-border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--accent2);flex-shrink:0;font-family:'DM Mono',monospace}
+.day-pill.done{background:var(--green-bg);border-color:var(--green-border);color:var(--green)}
+.day-info{flex:1;min-width:0}
+.day-n{font-size:13px;font-weight:500}
+.day-topics{font-size:12px;color:var(--text2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.day-method{font-size:11px;color:var(--accent2);margin-top:3px}
 
 /* TIPS */
-.tips-box { margin: 0 16px 16px; background: var(--accent-bg); border: 0.5px solid var(--accent-border); border-radius: var(--radius); padding: 14px; }
-.tip-row { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
-.tip-row:last-child { margin-bottom: 0; }
-.tip-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
-.tip-text { font-size: 13px; color: var(--accent2); line-height: 1.5; }
+.tips-box{margin:0 16px 20px;background:var(--accent-bg);border:0.5px solid var(--accent-border);border-radius:var(--radius);padding:14px}
+.tip-row{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start}
+.tip-row:last-child{margin-bottom:0}
+.tip-text{font-size:13px;color:var(--accent2);line-height:1.5}
 
-/* RESET section stats btn */
-.reset-btn { display: block; margin: 8px 16px 0; padding: 8px; background: transparent; border: 0.5px solid var(--border); border-radius: var(--radius-sm); color: var(--text3); font-size: 11px; font-family: inherit; cursor: pointer; text-align: center; width: calc(100% - 32px); }
+/* SEZIONI */
+.search-wrap{padding:10px 16px;background:var(--bg);border-bottom:0.5px solid var(--border)}
+.search-input{width:100%;padding:10px 14px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--bg3);color:var(--text);font-size:14px;font-family:inherit;outline:none}
+.search-input::placeholder{color:var(--text3)}
+.sections-list{padding:10px 16px}
+.sec-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:13px 14px;margin-bottom:9px;cursor:pointer;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);transition:border-color .15s}
+.sec-item:active{border-color:var(--accent-border)}
+.sec-icon-wrap{width:40px;height:40px;border-radius:var(--radius-sm);background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.sec-info{flex:1;min-width:0}
+.sec-name{font-size:14px;font-weight:500}
+.sec-progress{display:flex;align-items:center;gap:8px;margin-top:5px}
+.sec-bar{flex:1;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.sec-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s}
+.sec-pct{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;width:30px;text-align:right}
+.sec-count{font-size:11px;color:var(--text3)}
+
+/* DETAIL */
+.detail-header{background:var(--bg);padding:12px 16px 14px;position:sticky;top:0;z-index:100;border-bottom:0.5px solid var(--border)}
+.back-btn{display:inline-flex;align-items:center;gap:4px;font-size:14px;color:var(--accent2);cursor:pointer;border:none;background:none;font-family:inherit;padding:6px 0;margin-bottom:6px;min-height:36px}
+.detail-title-row{display:flex;align-items:center;gap:8px}
+.detail-title{font-size:18px;font-weight:600}
+.detail-meta{font-size:12px;color:var(--text2);margin-top:3px}
+.qa-list{padding:12px 16px}
+.qa-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow);transition:border-color .2s}
+.qa-card.read{border-color:var(--green-border)}
+.qa-num{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;padding:12px 14px 0}
+.qa-q{padding:4px 14px 0;font-size:15px;font-weight:500;line-height:1.5}
+.qa-ans-wrap{margin:10px 14px;background:var(--accent-bg);border:0.5px solid var(--accent-border);border-radius:var(--radius-sm);padding:10px 12px;display:flex;align-items:flex-start;gap:8px}
+.qa-check{font-size:15px;flex-shrink:0;margin-top:1px}
+.qa-ans-text{font-size:13px;font-weight:500;color:var(--accent2);line-height:1.5}
+.qa-exp{padding:0 14px 10px;font-size:13px;color:var(--text2);line-height:1.6}
+/* MARK READ BTN — grande e facilmente toccabile */
+.mark-read-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:calc(100% - 28px);margin:4px 14px 14px;padding:13px 16px;background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-sm);color:var(--text2);font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .2s;min-height:48px}
+.mark-read-btn:active{opacity:.7}
+.mark-read-btn.done{background:var(--green-bg);border-color:var(--green-border);color:var(--green)}
+
+/* FLASHCARD */
+.flash-wrap{padding:14px 16px}
+.flash-filter{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px}
+.flash-filter::-webkit-scrollbar{display:none}
+.chip{padding:7px 13px;border-radius:20px;border:0.5px solid var(--border2);font-size:12px;font-weight:500;cursor:pointer;background:var(--bg2);color:var(--text2);white-space:nowrap;transition:all .15s;min-height:34px}
+.chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.flash-prog-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.flash-counter{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace}
+.flash-score{font-size:12px;color:var(--text2)}
+.flash-prog-bar{height:4px;background:var(--bg3);border-radius:2px;margin-bottom:14px;overflow:hidden}
+.flash-prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s}
+.flash-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:18px;min-height:200px;padding:20px;cursor:pointer;transition:border-color .2s;display:flex;flex-direction:column;gap:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.flash-card.flipped{border-color:var(--accent-border)}
+.flash-section-tag{font-size:11px;color:var(--accent2);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.flash-question{font-size:16px;font-weight:500;line-height:1.5}
+.flash-tap-hint{font-size:12px;color:var(--text3);margin-top:4px}
+.flash-divider{height:0.5px;background:var(--border2)}
+.flash-answer{font-size:14px;font-weight:600;color:var(--green)}
+.flash-explain{font-size:13px;color:var(--text2);line-height:1.6}
+.flash-btns{display:flex;gap:10px;margin-top:2px}
+.flash-btn{flex:1;padding:14px;border-radius:var(--radius-sm);border:0.5px solid;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;min-height:50px;transition:opacity .15s}
+.flash-btn:active{opacity:.7}
+.fbtn-bad{background:var(--red-bg);border-color:var(--red-border);color:var(--red)}
+.fbtn-good{background:var(--green-bg);border-color:var(--green-border);color:var(--green)}
+.flash-reveal-btn{width:100%;padding:14px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;min-height:50px;transition:border-color .2s;box-shadow:var(--shadow)}
+.flash-reveal-btn:active{border-color:var(--accent-border)}
+
+/* SUMMARY */
+.summary-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:24px 20px;text-align:center;margin:16px 16px 0;box-shadow:var(--shadow)}
+.summary-icon{font-size:44px;margin-bottom:10px}
+.summary-title{font-size:20px;font-weight:600;margin-bottom:4px}
+.summary-sub{font-size:13px;color:var(--text2);margin-bottom:18px}
+.summary-stats{display:flex;justify-content:center;gap:28px;margin-bottom:20px}
+.summary-stat-val{font-size:26px;font-weight:600;font-family:'DM Mono',monospace}
+.summary-stat-lbl{font-size:11px;color:var(--text2);margin-top:2px}
+.btn-primary{padding:13px 28px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;min-height:48px;transition:opacity .15s}
+.btn-primary:active{opacity:.8}
+
+/* QUIZ */
+.quiz-wrap{padding:14px 16px}
+.quiz-header-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.quiz-header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.quiz-q-num{font-size:12px;font-family:'DM Mono',monospace;color:var(--text3)}
+.quiz-score-badge{font-size:12px;font-weight:600;color:var(--accent2);background:var(--accent-bg);border:0.5px solid var(--accent-border);border-radius:12px;padding:3px 10px}
+.quiz-prog-bar-wrap{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.quiz-prog-bar{height:100%;background:var(--accent);border-radius:2px;transition:width .3s}
+.quiz-question{font-size:16px;font-weight:500;line-height:1.55;margin:14px 0 4px}
+.quiz-section-tag{font-size:11px;color:var(--text3);margin-bottom:14px}
+.quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.quiz-option{padding:14px 16px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--bg2);color:var(--text);font-size:14px;font-family:inherit;cursor:pointer;text-align:left;line-height:1.45;transition:all .15s;min-height:52px;box-shadow:var(--shadow);font-weight:400}
+.quiz-option:active{opacity:.8}
+.quiz-option.selected{border-color:var(--accent-border);background:var(--accent-bg);color:var(--accent2);font-weight:500}
+.quiz-option.correct{border-color:var(--green-border);background:var(--green-bg);color:var(--green);font-weight:500}
+.quiz-option.wrong{border-color:var(--red-border);background:var(--red-bg);color:var(--red);font-weight:500}
+.quiz-option.show-correct{border-color:var(--green-border);background:var(--green-bg);color:var(--green);font-weight:500}
+.quiz-option:disabled{cursor:default}
+.quiz-exp-box{background:var(--amber-bg);border:0.5px solid rgba(251,191,36,0.3);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--text2);line-height:1.6;display:none}
+.quiz-exp-box.show{display:block}
+.quiz-exp-title{font-size:12px;font-weight:600;color:var(--amber);margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
+.quiz-next-btn{width:100%;padding:14px;border-radius:var(--radius-sm);border:none;background:var(--accent);color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;display:none;min-height:52px;transition:opacity .15s}
+.quiz-next-btn:active{opacity:.8}
+.quiz-next-btn.show{display:flex;align-items:center;justify-content:center;gap:8px}
+
+/* QUIZ START */
+.quiz-start-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;box-shadow:var(--shadow)}
+.quiz-start-title{font-size:18px;font-weight:600;margin-bottom:6px}
+.quiz-start-sub{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:16px}
+.quiz-cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.quiz-cat-btn{padding:11px 10px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--bg3);color:var(--text2);font-size:13px;font-family:inherit;cursor:pointer;text-align:center;font-weight:500;transition:all .15s;min-height:44px}
+.quiz-cat-btn.active{background:var(--accent-bg);border-color:var(--accent-border);color:var(--accent2)}
+.start-quiz-btn{width:100%;padding:15px;border-radius:var(--radius-sm);border:none;background:var(--accent);color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;min-height:52px}
+.start-quiz-btn:active{opacity:.8}
+
+/* HISTORY */
+.history-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin:0 16px 10px;box-shadow:var(--shadow);cursor:pointer;transition:border-color .15s}
+.history-card:active{border-color:var(--accent-border)}
+.history-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.history-score{font-size:20px;font-weight:600;font-family:'DM Mono',monospace}
+.history-score.good{color:var(--green)}
+.history-score.mid{color:var(--amber)}
+.history-score.bad{color:var(--red)}
+.history-badge{font-size:11px;padding:3px 9px;border-radius:12px;font-weight:600}
+.history-badge.good{background:var(--green-bg);color:var(--green);border:0.5px solid var(--green-border)}
+.history-badge.mid{background:var(--amber-bg);color:var(--amber);border:0.5px solid rgba(251,191,36,0.3)}
+.history-badge.bad{background:var(--red-bg);color:var(--red);border:0.5px solid var(--red-border)}
+.history-meta{font-size:12px;color:var(--text3)}
+.history-prog-bar{height:4px;background:var(--bg3);border-radius:2px;margin-top:10px;overflow:hidden}
+.history-prog-fill{height:100%;border-radius:2px;transition:width .3s}
+.no-history{text-align:center;padding:40px 20px;color:var(--text3);font-size:14px}
+
+/* DETAIL QUIZ RESULT */
+.result-detail-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);margin:0 16px 12px;overflow:hidden;box-shadow:var(--shadow)}
+.result-q-header{padding:12px 14px 8px;display:flex;align-items:center;gap:8px}
+.result-icon{font-size:16px;flex-shrink:0}
+.result-q-text{font-size:14px;font-weight:500;line-height:1.4}
+.result-ans{padding:0 14px 8px;font-size:13px}
+.result-ans.wrong{color:var(--red)}
+.result-ans.correct{color:var(--green);font-weight:500}
+.result-exp{padding:8px 14px 14px;font-size:13px;color:var(--text2);line-height:1.6;border-top:0.5px solid var(--border)}
+.result-exp::before{content:'💡 '}
+
+/* NUMERI */
+.nums-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;padding:12px 16px}
+.num-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+.num-val{font-size:24px;font-weight:600;color:var(--accent2);font-family:'DM Mono',monospace;margin-bottom:4px}
+.num-lbl{font-size:13px;font-weight:500;margin-bottom:3px}
+.num-ctx{font-size:11px;color:var(--text3);line-height:1.4}
 </style>
 </head>
 <body>
 <div class="app">
-  <!-- SCREENS -->
   <div class="screen" id="screen-home"></div>
   <div class="screen" id="screen-sezioni" style="display:none"></div>
   <div class="screen" id="screen-detail" style="display:none"></div>
   <div class="screen" id="screen-flash" style="display:none"></div>
+  <div class="screen" id="screen-quiz" style="display:none"></div>
   <div class="screen" id="screen-numeri" style="display:none"></div>
 
-  <!-- BOTTOM NAV -->
   <nav class="nav">
-    <button class="nav-btn active" onclick="goTo('home',this)">
-      <span class="nav-icon">🏠</span><span class="nav-label">Home</span>
-    </button>
-    <button class="nav-btn" onclick="goTo('sezioni',this)">
-      <span class="nav-icon">📚</span><span class="nav-label">Sezioni</span>
-    </button>
-    <button class="nav-btn" onclick="goTo('flash',this)">
-      <span class="nav-icon">🃏</span><span class="nav-label">Flashcard</span>
-    </button>
-    <button class="nav-btn" onclick="goTo('numeri',this)">
-      <span class="nav-icon">🔢</span><span class="nav-label">Numeri</span>
-    </button>
+    <button class="nav-btn active" onclick="goTo('home',this)"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
+    <button class="nav-btn" onclick="goTo('sezioni',this)"><span class="nav-icon">📚</span><span class="nav-label">Sezioni</span></button>
+    <button class="nav-btn" onclick="goTo('flash',this)"><span class="nav-icon">🃏</span><span class="nav-label">Flashcard</span></button>
+    <button class="nav-btn" onclick="goTo('quiz',this)"><span class="nav-icon">🧠</span><span class="nav-label">Quiz</span></button>
+    <button class="nav-btn" onclick="goTo('numeri',this)"><span class="nav-icon">🔢</span><span class="nav-label">Numeri</span></button>
   </nav>
 </div>
 
 <script>
-// ========================
+// ============================
 // DATA
-// ========================
+// ============================
 const SECTIONS = [
   {id:1,name:"Attività Didattiche",icon:"📚",cat:"organizzazione",qa:[
-    {q:"Il Maestro Nazionale:",a:"Può lavorare in tutte le fasi didattiche",e:"Il Maestro Nazionale è la qualifica più alta (4° livello). Può operare in qualsiasi fase didattica, dall'avviamento all'alto livello. Le altre opzioni sono false: può allenare nell'alto livello e può occuparsi di tutti gli sport di racchetta."},
-    {q:"La qualifica di Istruttore di 1° Grado/Livello:",a:"È triennale",e:"La qualifica dura 3 anni, non 2. Vale per padel, beach tennis, pickleball ecc. Non si rinnova con il Simposio Internazionale."},
-    {q:"Il Corso di Preparatore Fisico di 1° Grado:",a:"È riservato ai laureati in Scienze Motorie",e:"Questo corso ha un requisito formativo specifico. Non è aperto a tutti gli insegnanti."},
-    {q:"Il percorso per la qualifica di Istruttore di 1° Grado si articola in:",a:"3 step formativi",e:"Tre step: teoria + pratica + verifica/esame. Ricordati il numero 3 — né 2 né 4 né 5."},
-    {q:"I C.A.P. e i C.A.T. si occupano di:",a:"Bambini dai 7 ai 10 anni circa",e:"Centri di Avviamento alla Pratica: fascia 7-10 anni. I C.P.A. si occupano della fascia 11-16/18 anni."}
+    {q:"Il Maestro Nazionale:",a:"Può lavorare in tutte le fasi didattiche",e:"Il Maestro Nazionale è la qualifica più alta (4° livello). Può operare in qualsiasi fase didattica, dall'avviamento all'alto livello.",wrong:["Non può allenare nell'alto livello","Corrisponde al 3° livello","Non può occuparsi di Padel"]},
+    {q:"La qualifica di Istruttore di 1° Grado/Livello:",a:"È triennale",e:"La qualifica dura 3 anni. Vale per padel, beach tennis ecc. Non si rinnova con il Simposio Internazionale.",wrong:["È biennale","È presente solo nel tennis","Si rinnova con il Simposio Internazionale"]},
+    {q:"Il Corso di Preparatore Fisico di 1° Grado:",a:"È riservato ai laureati in Scienze Motorie",e:"Questo corso ha un requisito formativo specifico. Non è aperto a tutti gli insegnanti.",wrong:["È aperto a tutti gli insegnanti","Abilita a lavorare solo nel tennis","Abilita a lavorare nella fase di avviamento"]},
+    {q:"Il percorso per la qualifica di Istruttore di 1° Grado si articola in:",a:"3 step formativi",e:"Tre step: teoria + pratica + verifica/esame.",wrong:["2 step formativi","4 step formativi","5 step formativi"]},
+    {q:"I C.A.P. e i C.A.T. si occupano di:",a:"Bambini dai 7 ai 10 anni circa",e:"Centri di Avviamento alla Pratica: fascia 7-10 anni. I C.P.A. si occupano degli 11-16/18 anni.",wrong:["Ragazzi dagli 11 ai 16 anni","Sono a Formia e Tirrenia per l'alto livello","Raduni ai centri estivi"]}
   ]},
   {id:2,name:"Scuole Federali",icon:"🏫",cat:"organizzazione",qa:[
-    {q:"L'ISF si occupa:",a:"Formazione insegnanti + settore tecnico nazionale Under 18",e:"L'ISF ha doppio ruolo: forma gli insegnanti E gestisce il settore tecnico under 18. Non è solo per tennis e padel, e non under 20."},
-    {q:"I C.P.A.:",a:"Si occupano dell'attività dagli 11 ai 16-18 anni",e:"Centri di Preparazione Avanzata: fascia pre-agonismo e agonismo giovanile 11-16/18 anni. Non sono a Formia/Tirrenia."},
-    {q:"L'Istruttore di 1° Grado può coordinare:",a:"Una Basic School",e:"1° grado = SOLO Basic School. Non Club School (qualifica superiore) né Standard School."},
-    {q:"Nel Padel e nel Beach Tennis esistono:",a:"Club, Basic e Standard School (3 tipologie)",e:"3 tipologie per padel/beach. Il tennis ne ha 5 (Club-Basic-Standard-Super-Top)."},
-    {q:"Il FIT Junior Program è un progetto per:",a:"Allievi NON in possesso della tessera agonistica",e:"Per chi inizia senza la pressione della competizione formale. Non per agonisti né per i C.A.P./C.P.A."}
+    {q:"L'ISF si occupa:",a:"Formazione insegnanti + settore tecnico nazionale Under 18",e:"L'ISF ha doppio ruolo: forma gli insegnanti E gestisce il settore tecnico under 18. Non solo tennis e padel.",wrong:["Esclusivamente della formazione degli insegnanti","Della formazione insegnanti e del settore Under 20","Solo dei corsi di tennis e padel"]},
+    {q:"I C.P.A.:",a:"Si occupano dell'attività dagli 11 ai 16-18 anni",e:"Centri di Preparazione Avanzata: fascia pre-agonismo 11-16/18 anni. Non sono a Formia/Tirrenia.",wrong:["Sono a Formia e a Tirrenia","Si occupano dell'attività Under 10","Sono coordinati dai fiduciari dell'ISF"]},
+    {q:"L'Istruttore di 1° Grado può coordinare:",a:"Una Basic School",e:"1° grado = SOLO Basic School. Non Club School né Standard School.",wrong:["Una Club School","Club e Basic School","Una Standard School"]},
+    {q:"Nel Padel e nel Beach Tennis esistono:",a:"Club, Basic e Standard School (3 tipologie)",e:"3 tipologie per padel/beach. Il tennis ne ha 5 (Club-Basic-Standard-Super-Top).",wrong:["5 tipologie di scuole","4 tipologie di scuole","Non esistono ancora le tipologie di scuole"]},
+    {q:"Il FIT Junior Program è un progetto per:",a:"Allievi NON in possesso della tessera agonistica",e:"Per chi inizia senza la pressione della competizione formale. Non per agonisti.",wrong:["Gli allievi che partecipano ai C.A.P.","Gli allievi dei C.P.A.","Aperto ad agonisti"]}
   ]},
   {id:3,name:"Fasi Didattiche",icon:"🎓",cat:"didattica",qa:[
-    {q:"Le fasi didattiche:",a:"Sono legate alle competenze (non all'età)",e:"Un bambino di 8 anni può essere in fase avanzata se ha le competenze. Ci sono 3 fasi: avviamento, perfezionamento, specializzazione."},
-    {q:"\"Apprendere con consapevolezza\" è lo slogan:",a:"Del Perfezionamento",e:"Mini = Apprendere giocando/divertendosi. Perfezionamento = Apprendere con consapevolezza. Specializzazione = Individualizzazione."},
-    {q:"Il Gioco-Sport si caratterizza per:",a:"Attrezzi, Spazi, Regole + Azioni di gioco (4 elementi)",e:"Non basta 'attrezzi, spazi, regole'. Ci vogliono anche le azioni di gioco che caratterizzano il gioco."},
-    {q:"Rapporto insegnante/allievo nella Prima Fase:",a:"1 insegnante, 4 allievi",e:"Prima fase = 1:4. Perfezionamento = 1:2-3. Specializzazione può arrivare a 1:1."},
-    {q:"Parola chiave della Specializzazione:",a:"Individualizzazione",e:"Nella specializzazione si lavora personalizzato sul singolo atleta. Non 'vincere', non 'consolidamento'."}
+    {q:"Le fasi didattiche:",a:"Sono legate alle competenze (non all'età)",e:"Un bambino di 8 anni può essere in fase avanzata se ha le competenze. Ci sono 3 fasi.",wrong:["Sono legate all'età cronologica","Sono 5","Sono legate all'anno di nascita"]},
+    {q:"\"Apprendere con consapevolezza\" è lo slogan:",a:"Del Perfezionamento",e:"Mini = Apprendere giocando/divertendosi. Perfezionamento = Apprendere con consapevolezza. Specializzazione = Individualizzazione.",wrong:["Del Mini-Padel/Beach","Della Specializzazione","Di nessuna fase didattica"]},
+    {q:"Il Gioco-Sport si caratterizza per:",a:"Attrezzi, Spazi, Regole + Azioni di gioco (4 elementi)",e:"Non bastano 'attrezzi, spazi, regole'. Ci vogliono anche le azioni di gioco.",wrong:["Mentale, Motorio, Tattico, Tecnico","Attrezzi, Spazi, Regole (3 elementi)","Età dell'allievo e livello di gioco"]},
+    {q:"Rapporto insegnante/allievo nella Prima Fase Didattica:",a:"1 insegnante, 4 allievi",e:"Prima fase = 1:4. Perfezionamento = 1:2-3. Specializzazione può arrivare a 1:1.",wrong:["1 insegnante, 6 allievi","1 insegnante, 8 allievi","2 insegnanti, 10 allievi"]},
+    {q:"Parola chiave della fase della Specializzazione:",a:"Individualizzazione",e:"Nella specializzazione si lavora personalizzato sul singolo atleta.",wrong:["Universale","Consolidamento","Vincere"]}
   ]},
   {id:4,name:"Principi Didattici",icon:"📐",cat:"didattica",qa:[
-    {q:"I principi didattici:",a:"Sono fondamentali in TUTTE le fasi didattiche",e:"I 4 principi (multilateralità, multiformità, specificità, gradualità) si applicano sempre, non solo nella prima fase."},
-    {q:"L'ordine delle aree nella Multilateralità:",a:"Mentale → Motoria → Tattica → Tecnica",e:"Non si parte mai dalla tecnica! Prima la mente, poi il corpo, poi il tattico, poi il tecnico. L'ordine non è casuale."},
-    {q:"Il principio della Gradualità prevede:",a:"Percorrere tutti gli step dal più semplice al più complesso nella STESSA lezione",e:"Non è solo 'aumentare nel tempo' ma strutturare ogni singola lezione in progressione."},
-    {q:"Il principio della Multiformità suggerisce:",a:"Di variare gli esercizi per raggiungere UN obiettivo",e:"Stesso obiettivo, modi diversi. Non si cambiano gli obiettivi, si cambia il modo per raggiungerli."},
-    {q:"La Specificità dice che gli sport di racchetta sono:",a:"Di situazione, intermittenti, di combattimento",e:"NON 'di contatto'. Situazione = non si sa cosa farà l'avversario. Intermittenti = lavoro/recupero alternati."}
+    {q:"I principi didattici:",a:"Sono fondamentali in tutte le fasi didattiche",e:"I 4 principi (multilateralità, multiformità, specificità, gradualità) si applicano sempre.",wrong:["Sono 5","Sono solo tattici e tecnici","Sono relativi solo alla prima fase"]},
+    {q:"L'ordine delle aree nella Multilateralità è:",a:"Mentale → Motoria → Tattica → Tecnica",e:"Non si parte mai dalla tecnica! Prima la mente, poi il corpo, poi il tattico, poi il tecnico.",wrong:["Tecnica, Tattica, Fisica e Mentale","L'ordine è indifferente","Si parte sempre dall'area Motoria"]},
+    {q:"Il principio della Gradualità prevede:",a:"Percorrere tutti gli step dal più semplice al più complesso nella stessa lezione",e:"Non è solo 'aumentare nel tempo' ma strutturare ogni singola lezione in progressione.",wrong:["Fa riferimento solo agli esercizi","Fa riferimento solo ai mezzi didattici","Consiglia di tornare sempre agli step precedenti"]},
+    {q:"Il principio della Multiformità suggerisce:",a:"Di variare gli esercizi per raggiungere UN obiettivo",e:"Stesso obiettivo, modi diversi. Non si cambiano gli obiettivi.",wrong:["Lo sviluppo di diversi obiettivi nella stessa lezione","Di cambiare sempre gli esercizi senza scopo","Di far provare diversi sport di racchetta"]},
+    {q:"La Specificità dice che gli sport di racchetta sono:",a:"Di situazione, intermittenti, di combattimento",e:"NON 'di contatto'. Situazione = non si sa cosa farà l'avversario.",wrong:["Di combattimento, di contatto, intermittenti","La partita è l'unico mezzo di allenamento","Bisogna allenarsi senza avversario"]}
   ]},
   {id:5,name:"Conoscenze e Competenze",icon:"🧩",cat:"didattica",qa:[
-    {q:"Area di conoscenza NON fondamentale per un istruttore:",a:"Gestione aziendale e finanza",e:"Servono fisiologia, biomeccanica, psicologia, pedagogia, metodi didattici. La finanza non è richiesta."},
-    {q:"Aspetto cruciale nel processo di apprendimento dell'allievo:",a:"Il passaggio dalla comprensione teorica alla pratica",e:"Sapere non basta: l'allievo deve trasferire la conoscenza teorica al gesto pratico."},
-    {q:"Fattore che contribuisce al successo dell'istruttore oltre la tecnica:",a:"Creare una relazione positiva e motivante con gli allievi",e:"Un istruttore tecnicamente perfetto ma incapace di motivare fallirà."},
-    {q:"Cosa si intende per 'programmazione' nell'insegnamento:",a:"Processo strutturato e flessibile: valutazione, obiettivi, risorse",e:"Non è solo scegliere gli esercizi. È un processo completo: valuti, pianifichi, verifichi."},
-    {q:"Competenza fondamentale per un istruttore:",a:"La capacità di motivare gli allievi",e:"La motivazione è il motore dell'apprendimento. Lingue, storia, social media sono accessori."}
+    {q:"Area di conoscenza NON fondamentale per un istruttore:",a:"Gestione aziendale e finanza",e:"Servono fisiologia, biomeccanica, psicologia, pedagogia, metodi didattici. La finanza non è richiesta.",wrong:["Fisiologia e biomeccanica","Psicologia e pedagogia","Metodi didattici e teoria dell'allenamento"]},
+    {q:"Aspetto CRUCIALE nel processo di apprendimento:",a:"Il passaggio dalla comprensione teorica alla pratica",e:"Sapere non basta: l'allievo deve trasferire la conoscenza teorica al gesto pratico.",wrong:["Solo la comprensione teorica","La capacità di memorizzare le regole","La semplice imitazione del movimento"]},
+    {q:"Fattore di successo dell'istruttore oltre le competenze tecniche:",a:"Creare una relazione positiva e motivante con gli allievi",e:"Un istruttore tecnicamente perfetto ma incapace di motivare fallirà.",wrong:["Un'attrezzatura sportiva di alta qualità","La capacità di parlare più lingue","Avere un alto numero di iscritti"]},
+    {q:"Cosa si intende per 'programmazione' nell'insegnamento sportivo:",a:"Processo strutturato e flessibile: valutazione, obiettivi, risorse",e:"Non è solo scegliere gli esercizi. È un processo completo: valutazione, pianificazione, verifica.",wrong:["La semplice scelta degli esercizi per una lezione","La capacità di improvvisare durante l'allenamento","La pianificazione delle gare e dei tornei"]},
+    {q:"Competenza fondamentale per un istruttore:",a:"La capacità di motivare gli allievi",e:"La motivazione è il motore dell'apprendimento.",wrong:["La capacità di parlare diverse lingue","La conoscenza della storia dello sport","L'abilità nella gestione dei social media"]}
   ]},
   {id:6,name:"Compiti e Responsabilità",icon:"⚖️",cat:"organizzazione",qa:[
-    {q:"Responsabilità PRIORITARIA per un istruttore:",a:"Assicurare la sicurezza e l'incolumità fisica degli allievi",e:"La sicurezza viene SEMPRE prima. C'è responsabilità legale e morale sulla sicurezza."},
-    {q:"Competenze fondamentali oltre a quelle tecniche:",a:"Pedagogiche, psicologiche e di gestione del gruppo",e:"Il triangolo: tecnica + pedagogia + psicologia. Non solo competenze linguistiche o informatiche."},
-    {q:"Aspetto essenziale per garantire la sicurezza durante l'attività:",a:"Verifica dell'idoneità di luoghi, attrezzature ed esercitazioni",e:"La sicurezza è tridimensionale: spazio (campo) + strumenti (racchette) + contenuti (esercizi)."},
-    {q:"Competenza sempre più richiesta agli istruttori:",a:"Documentare e presentare efficacemente le attività svolte",e:"Nell'era digitale saper documentare le attività (relazioni, report) è fondamentale."}
+    {q:"Responsabilità PRIORITARIA per un istruttore:",a:"Assicurare la sicurezza e l'incolumità fisica degli allievi",e:"La sicurezza viene SEMPRE prima. C'è responsabilità legale e morale.",wrong:["Organizzare eventi e tornei","Gestire la comunicazione sui social media","Mantenere aggiornata la propria attrezzatura"]},
+    {q:"Competenze fondamentali oltre a quelle tecniche:",a:"Pedagogiche, psicologiche e di gestione del gruppo",e:"Il triangolo: tecnica + pedagogia + psicologia.",wrong:["Solo competenze linguistiche","Solo competenze informatiche","Solo competenze di marketing"]},
+    {q:"Aspetto essenziale per garantire la sicurezza durante l'attività:",a:"Verifica dell'idoneità di luoghi, attrezzature ed esercitazioni",e:"La sicurezza è tridimensionale: spazio + strumenti + contenuti.",wrong:["Un'attrezzatura costosa e di ultima generazione","Un numero elevato di istruttori","L'utilizzo di protocolli standardizzati"]}
   ]},
   {id:7,name:"Il Contesto Operativo",icon:"🏗️",cat:"organizzazione",qa:[
-    {q:"Il 'modello tecnico' per un istruttore è:",a:"Un'immagine mentale che guida le scelte durante l'insegnamento",e:"Non è un insieme di regole rigide né l'immagine di un campione. È una mappa flessibile e personalizzabile."},
-    {q:"Perché adattare il modello tecnico all'allievo:",a:"Per massimizzare l'efficacia dell'insegnamento",e:"Ogni allievo è diverso. Applicare lo stesso schema a tutti non funziona."},
-    {q:"Fattore che NON influenza la costruzione del modello tecnico:",a:"Le preferenze estetiche personali dell'istruttore",e:"Il modello è influenzato da esperienze sportive, biomeccanica, indicazioni federali — non da gusti personali."},
-    {q:"Sport dove la tecnica rappresenta il RISULTATO FINALE:",a:"Sport valutativi con giuria (ginnastica, tuffi)",e:"In padel/tennis la tecnica è il mezzo per vincere il punto. Nella ginnastica artistica la tecnica È il risultato."}
+    {q:"Il 'modello tecnico' per un istruttore è:",a:"Un'immagine mentale che guida le scelte durante l'insegnamento",e:"Non è un insieme di regole rigide. È una mappa flessibile e personalizzabile.",wrong:["Un insieme di regole fisse e immutabili","Un'immagine ideale dell'atleta professionista","Un insieme di attrezzature sportive"]},
+    {q:"Fattore che NON influenza la costruzione del modello tecnico:",a:"Le preferenze estetiche personali dell'istruttore",e:"Il modello è influenzato da esperienze sportive, biomeccanica, indicazioni federali — non da gusti personali.",wrong:["Le proprie esperienze sportive","La conoscenza della biomeccanica","L'influenza di modelli proposti dalla federazione"]},
+    {q:"Sport dove la tecnica rappresenta il RISULTATO FINALE:",a:"Sport valutativi con giuria (ginnastica, tuffi)",e:"In padel/tennis la tecnica è il mezzo per vincere il punto. Nella ginnastica artistica la tecnica È il risultato.",wrong:["Sport di squadra","Sport di situazione (tennis, padel)","Sport che richiedono forte componente fisica"]}
   ]},
   {id:8,name:"Capacità Motorie",icon:"🏃",cat:"fisiologia",qa:[
-    {q:"Differenza tra capacità motorie e abilità motorie:",a:"Le capacità sono i presupposti per lo sviluppo delle abilità",e:"Capacità = terreno fertile (coordinazione, forza...). Abilità = frutti (saper fare un dritto, un servizio)."},
-    {q:"L'analizzatore più importante per la regolazione del movimento:",a:"Analizzatore visivo",e:"L'83% delle informazioni passa attraverso il canale visivo. La visione domina sugli altri sensi."},
-    {q:"Le due categorie delle capacità motorie:",a:"Condizionali e coordinative",e:"Condizionali = Forza, Resistenza, Velocità, Mobilità. Coordinative = Equilibrio, Ritmo, Reazione, Orientamento."},
-    {q:"La mobilità articolare è puramente condizionale?",a:"FALSO — ha componenti sia condizionali sia coordinative",e:"Ha parti muscolari (condizionale) E controllo neuromuscolare (coordinativa). Non è 'puramente' condizionale."},
-    {q:"L'automatizzazione del movimento significa:",a:"Eseguire il movimento in modo fluido senza eccessivo controllo cosciente",e:"Come guidare dopo anni di pratica. Il dritto automatizzato lascia la mente libera per la tattica."}
+    {q:"Differenza tra capacità motorie e abilità motorie:",a:"Le capacità sono i presupposti per lo sviluppo delle abilità",e:"Capacità = terreno fertile (coordinazione, forza). Abilità = frutti (saper fare un dritto).",wrong:["La capacità di eseguire movimenti complessi in simultanea","La capacità di ripetere un movimento identico","La capacità di prevedere i movimenti dell'avversario"]},
+    {q:"L'analizzatore più importante per la regolazione del movimento nello sport:",a:"Analizzatore visivo",e:"L'83% delle informazioni passa attraverso il canale visivo. La visione domina.",wrong:["Analizzatore motorio-percettivo","Analizzatore ricettivo","Analizzatore mnemonico"]},
+    {q:"Le due categorie delle capacità motorie:",a:"Condizionali e coordinative",e:"Condizionali = Forza, Resistenza, Velocità, Mobilità. Coordinative = Equilibrio, Ritmo, Reazione.",wrong:["Forza e resistenza","Coordinazione ed equilibrio","Velocità e reazione"]},
+    {q:"Affermazione FALSA sulla mobilità articolare:",a:"È una capacità puramente condizionale, non coordinativa",e:"Ha componenti condizionali (muscoli, tendini) E coordinative (controllo neuromuscolare). Non è 'puramente' condizionale.",wrong:["È influenzata da fattori strutturali e nervosi","Influenza l'apprendimento delle tecniche sportive","Tende a diminuire con l'avanzare dell'età"]},
+    {q:"L'automatizzazione del movimento significa:",a:"Eseguire il movimento in modo fluido senza eccessivo controllo cosciente",e:"Come guidare dopo anni di pratica. Il dritto automatizzato lascia la mente libera per la tattica.",wrong:["Eseguire movimenti complessi in simultanea","Ripetere un movimento in modo identico","Prevedere i movimenti dell'avversario"]}
   ]},
   {id:9,name:"Abilità Motorie",icon:"🤸",cat:"fisiologia",qa:[
-    {q:"I tre tipi di abilità in base all'organizzazione del compito:",a:"Discrete, continue, seriali",e:"Discrete = inizio/fine definiti (servizio). Continue = senza fine definita (correre). Seriali = sequenza di discrete."},
-    {q:"Criterio più rilevante per le abilità negli sport di racchetta:",a:"La variabilità ambientale",e:"Il padel è open: la palla arriva sempre diversa. Il contesto cambia continuamente → open skill."},
-    {q:"'Abilità chiusa' significa:",a:"Un'abilità che si svolge in un contesto stabile e prevedibile",e:"Chiusa = stabile (ginnastica con routine fissa). Aperta = variabile (risposta a un colpo nel padel)."}
+    {q:"I tre tipi di abilità in base all'organizzazione del compito:",a:"Discrete, continue, seriali",e:"Discrete = inizio/fine definiti (servizio). Continue = senza fine (correre). Seriali = sequenza di discrete.",wrong:["Semplici, complesse, combinate","Chiuse, aperte, miste","Statiche, dinamiche, ritmiche"]},
+    {q:"Criterio più rilevante per le abilità negli sport di racchetta:",a:"La variabilità ambientale",e:"Il padel è open: la palla arriva sempre diversa. Il contesto cambia continuamente.",wrong:["La complessità del gesto motorio","Il coinvolgimento dei gruppi muscolari","La durata del movimento"]},
+    {q:"'Abilità chiusa' in ambito motorio significa:",a:"Un'abilità in un contesto stabile e prevedibile",e:"Chiusa = stabile. Aperta = variabile. Gli sport di racchetta sono prevalentemente open skill.",wrong:["Un'abilità che richiede forte interazione con l'ambiente","Un'abilità con continua presa di decisioni","Un'abilità che richiede elevata precisione"]}
   ]},
   {id:10,name:"L'Apprendimento",icon:"📈",cat:"didattica",qa:[
-    {q:"Differenza tra prestazione e apprendimento:",a:"Prestazione = risultato osservabile; Apprendimento = processo stabile sottostante",e:"Un allievo può avere una buona prestazione per fortuna. L'apprendimento è un cambiamento permanente."},
-    {q:"Definizione corretta di apprendimento:",a:"Insieme dei processi che determinano un cambiamento STABILE del comportamento",e:"Chiave: STABILE. Se oggi va bene ma domani no, non c'è apprendimento vero."},
-    {q:"Il 'plateau' nell'evoluzione tecnica è:",a:"Un periodo di stallo o leggera regressione SEGUITO DA UNA RIPRESA",e:"È normale nel percorso di apprendimento. Si ristagna apparentemente, poi si fa un salto. Non è una crisi!"},
-    {q:"Perché una prestazione precoce non garantisce l'eccellenza:",a:"Può essere dovuta a fattori contingenti, non a un apprendimento solido",e:"Il bambino precoce può essere avvantaggiato dalla maturazione biologica. Se l'apprendimento non è solido, gli altri lo raggiungono."}
+    {q:"Differenza tra prestazione e apprendimento:",a:"Prestazione = risultato osservabile; Apprendimento = processo stabile sottostante",e:"Un allievo può avere una buona prestazione per fortuna. L'apprendimento è un cambiamento permanente.",wrong:["La prestazione è un processo, l'apprendimento è un risultato","La prestazione è innata, l'apprendimento no","L'apprendimento è osservabile, la prestazione no"]},
+    {q:"Definizione corretta di apprendimento:",a:"Insieme dei processi che determinano un cambiamento STABILE del comportamento",e:"Chiave: STABILE. Se oggi va bene ma domani no, non c'è apprendimento vero.",wrong:["L'andamento lineare del miglioramento","La velocità con cui si apprendono le tecniche di base","Il livello di motivazione dell'atleta nel tempo"]},
+    {q:"Il 'plateau' nell'evoluzione tecnica è:",a:"Un periodo di stallo o leggera regressione SEGUITO DA UNA RIPRESA",e:"È normale nel percorso di apprendimento. Si ristagna, poi si fa un salto. Non è una crisi!",wrong:["Un improvviso miglioramento delle prestazioni","Un periodo di allenamento intenso","Un periodo di riposo e recupero"]},
+    {q:"Perché una prestazione precoce non garantisce l'eccellenza:",a:"Può essere dovuta a fattori contingenti, non a un apprendimento solido",e:"Il bambino precoce può essere avvantaggiato dalla maturazione biologica. Se l'apprendimento non è solido, gli altri lo raggiungono.",wrong:["A causa di un allenamento non adeguato","A causa di mancanza di motivazione","A causa di eccessiva specializzazione precoce"]}
   ]},
   {id:11,name:"Organizzazione della Lezione",icon:"📖",cat:"didattica",qa:[
-    {q:"Quante parti costituiscono una lezione tipo:",a:"3 parti",e:"Parte iniziale, parte centrale, parte finale. Sempre 3. Non 4 né 5."},
-    {q:"Gli elementi della parte iniziale della lezione:",a:"Accoglienza → Attivazione → Familiarizzazione → Dimostrazione",e:"La sequenza corretta in 4 elementi. Nella fase iniziale 'stretta' ci sono solo i primi 3."},
-    {q:"Quale parte occupa la maggior percentuale di tempo:",a:"La parte centrale (60-70%)",e:"Il cuore della lezione dove si lavora sull'obiettivo principale. Inizio e fine sono più brevi."},
-    {q:"Tipo di esercitazioni consigliate nella parte finale:",a:"Esercitazioni gara",e:"La fine deve ricreare condizioni di gioco reale con competizione. Consolida tutto ciò che si è lavorato."},
-    {q:"Rapporto ottimale nella fase del Perfezionamento:",a:"1 insegnante : 2-3 allievi",e:"Prima fase = 1:4. Perfezionamento = 1:2-3. Specializzazione può essere 1:1."}
+    {q:"Quante parti costituiscono una lezione tipo:",a:"3 parti",e:"Parte iniziale, parte centrale, parte finale. Sempre 3.",wrong:["4 parti","2 parti","5 parti"]},
+    {q:"Gli elementi corretti della parte iniziale:",a:"Accoglienza → Attivazione → Familiarizzazione → Dimostrazione",e:"La sequenza corretta in 4 elementi.",wrong:["Accoglienza → Attivazione → Dimostrazione → Spiegazione","Accoglienza → Propedeutica → Attivazione → Spiegazione","Attivazione → Accoglienza → Dimostrazione → Familiarizzazione"]},
+    {q:"Quale parte occupa la maggior percentuale di tempo nella 1ª fase:",a:"La parte centrale",e:"Il cuore della lezione dove si lavora sull'obiettivo principale (60-70%). Inizio e fine sono più brevi.",wrong:["Parte iniziale - attivazione","Parte centrale - situazione chiusa","Parte finale"]},
+    {q:"Tipo di esercitazioni consigliate nella parte finale:",a:"Esercitazioni gara",e:"La fine deve ricreare condizioni di gioco reale con competizione. Consolida tutto ciò che si è lavorato.",wrong:["Esercitazioni randomizzate","Esercitazioni variate","Esercitazioni di attivazione"]},
+    {q:"Rapporto ottimale nella fase del Perfezionamento:",a:"1 insegnante : 2-3 allievi",e:"Prima fase = 1:4. Perfezionamento = 1:2-3. Specializzazione può essere 1:1.",wrong:["1 insegnante : 1 allievo","1 insegnante : 4 allievi","2 insegnanti : 8 allievi"]}
   ]},
   {id:12,name:"Tipologie di Esercitazioni",icon:"🏋️",cat:"didattica",qa:[
-    {q:"Cosa si intende per 'familiarizzazione':",a:"Far conoscere la palla e la racchetta agli allievi",e:"È il primissimo step: il bambino esplora gli attrezzi senza obiettivi tecnici precisi."},
-    {q:"Tipi di attivazione motoria:",a:"Generale e Speciale",e:"Generale = corpo in senso ampio (corsa, mobilità). Speciale = specifica per la disciplina (movimenti simili al gioco)."},
-    {q:"Le esercitazioni a blocchi si usano in quale situazione:",a:"Situazione chiusa",e:"A blocchi = stessa palla ripetuta. Per situazioni stabili, per consolidare il gesto tecnico."},
-    {q:"Le esercitazioni variate sviluppano obiettivi:",a:"Tattici",e:"Modificano le variabili (direzione, velocità) mantenendo l'obiettivo. Sviluppano l'adattamento tattico."},
-    {q:"Tipo di obiettivo raggiunto con le esercitazioni propedeutiche:",a:"Apprendimento tecnico-coordinativo",e:"Preparano al gesto tecnico attraverso movimenti simili ma più semplici."}
+    {q:"Cosa si intende per 'familiarizzazione':",a:"Far conoscere la palla e la racchetta agli allievi",e:"È il primissimo step: il bambino esplora gli attrezzi senza obiettivi tecnici precisi.",wrong:["Conoscenza del gioco-sport","Processo di fidelizzazione tra allievo e insegnante","Padroneggiare le abilità tecniche e motorie"]},
+    {q:"Tipi di attivazione motoria:",a:"Generale e Speciale",e:"Generale = corpo in senso ampio. Speciale = specifica per la disciplina.",wrong:["Generale e Motoria","Psicofisica e Specifica","Riscaldamento mentale e fisico"]},
+    {q:"Le esercitazioni a blocchi si usano in quale situazione:",a:"Situazione chiusa",e:"A blocchi = stessa palla ripetuta. Per situazioni stabili, per consolidare il gesto tecnico.",wrong:["Situazione semi-aperta","Situazione aperta","Situazione semi-chiusa"]},
+    {q:"Le esercitazioni variate sviluppano obiettivi:",a:"Tattici",e:"Modificano le variabili mantenendo l'obiettivo. Sviluppano l'adattamento tattico.",wrong:["Tecnici","Motori","Mentali"]},
+    {q:"Tipo di obiettivo con esercitazioni propedeutiche:",a:"Apprendimento tecnico-coordinativo",e:"Preparano al gesto tecnico attraverso movimenti simili ma più semplici.",wrong:["Apprendimento mentale-tattico","Apprendimento fisico-mentale","Apprendimento ludico"]}
   ]},
-  {id:13,name:"Concetto di Organizzazione",icon:"🗂️",cat:"organizzazione",qa:[
-    {q:"Come definire il concetto di organizzazione:",a:"Uno strumento utile a fornire una struttura ordinata a qualcosa",e:"Non è solo il piano annuale né solo gestire gli allievi. È un concetto più ampio di strutturazione."},
-    {q:"Elementi del modello formativo di un insegnante:",a:"Sapere → Saper fare → Saper far fare",e:"Prima conosco la teoria, poi la applico su me stesso, poi la trasmetto agli altri. Il terzo livello è il più alto."},
-    {q:"Le 5 tipologie di scuole tennis in ordine:",a:"Club → Basic → Standard → Super → Top",e:"Ordine crescente di requisiti. Ricorda: C-B-S-S-T."},
-    {q:"Cosa sono le soft skills in organizzazione:",a:"Le capacità mentali e didattiche",e:"Competenze trasversali 'invisibili': empatia, comunicazione, gestione delle emozioni, didattica."}
+  {id:13,name:"Area Mentale e COMETA",icon:"⭐",cat:"didattica",qa:[
+    {q:"L'acronimo COMETA rappresenta:",a:"Un simbolo, un punto di riferimento importante",e:"Le funzioni dell'insegnante come punto di riferimento luminoso per gli allievi.",wrong:["Un nome che ricorda il Natale","Un punto di riferimento da non imitare","Un aspetto da non considerare"]},
+    {q:"Per 'Educare' in COMETA si intende:",a:"Sviluppare le potenzialità del bambino attraverso lo sport",e:"Educare = tirare fuori (e-ducere). Lo sport è il veicolo per sviluppare le potenzialità umane.",wrong:["Inibire le potenzialità del bambino","Trascurare le potenzialità del bambino","Negare le potenzialità del bambino"]},
+    {q:"Obiettivo NON del livello Delfino:",a:"Volitività",e:"Il livello Delfino ha: Attenzione, Divertimento, Entusiasmo. La volitività è un obiettivo più avanzato.",wrong:["Attenzione","Divertimento","Entusiasmo"]},
+    {q:"Il bambino a 5-6 anni è:",a:"Desideroso di gratificazioni istantanee",e:"A 5-6 anni vive il 'qui e ora': vuole ricompense immediate, non risultati a lungo termine.",wrong:["Fortemente cooperativo","Sempre attento e concentrato","Sempre pronto a competere"]},
+    {q:"La volitività è:",a:"La capacità di darsi obiettivi chiari e definiti",e:"Non è empatia né imagery. È la determinazione trasformata in obiettivi concreti.",wrong:["La capacità di leggere gli stati mentali dell'altro","La capacità di immaginarsi durante la prestazione","La capacità di regolare le proprie emozioni"]},
+    {q:"La Psicologia Positiva lavora su:",a:"Punti di forza della persona",e:"Non si focalizza su problemi/debolezze ma su risorse, punti di forza e benessere (Seligman).",wrong:["Punti deboli della persona","All'insaputa della persona","Trascurando la persona"]},
+    {q:"Howard Gardner è l'autore della teoria delle:",a:"Intelligenze Multiple",e:"Maslow = bisogni, Seligman = psicologia positiva, Miller = memoria, Gardner = intelligenze multiple.",wrong:["Psicologia positiva","Gerarchia dei bisogni","Apprendimento sociale"]}
   ]},
-  {id:14,name:"Area Mentale e COMETA",icon:"⭐",cat:"didattica",qa:[
-    {q:"L'acronimo COMETA rappresenta:",a:"Un simbolo, un punto di riferimento, un esempio importante",e:"Le funzioni dell'insegnante come punto di riferimento luminoso per gli allievi."},
-    {q:"Per 'Educare' in COMETA si intende:",a:"Sviluppare le potenzialità del bambino attraverso lo sport",e:"Educare = tirare fuori (e-ducere). Lo sport è il veicolo per sviluppare le potenzialità umane."},
-    {q:"Obiettivo NON del livello Delfino:",a:"Volitività",e:"Il livello Delfino ha: Attenzione, Divertimento, Entusiasmo. La volitività è un obiettivo più avanzato."},
-    {q:"Il bambino a 5-6 anni è:",a:"Desideroso di gratificazioni istantanee",e:"A 5-6 anni vive il 'qui e ora': vuole ricompense immediate, non risultati a lungo termine."},
-    {q:"La volitività è:",a:"La capacità di darsi obiettivi chiari e definiti",e:"Non è empatia né imagery. È la determinazione trasformata in obiettivi concreti."},
-    {q:"La Psicologia Positiva è finalizzata a lavorare su:",a:"Punti di forza della persona",e:"Non si focalizza su problemi/debolezze ma su risorse, punti di forza e benessere (Seligman)."},
-    {q:"La corretta sequenza della triade delle competenze dell'insegnante:",a:"Sapere → Saper fare → Saper far fare",e:"Conoscenza teorica → applicazione pratica → trasmissione agli altri."},
-    {q:"Howard Gardner è l'autore della teoria delle:",a:"Intelligenze Multiple (che include la creatività)",e:"Maslow = bisogni, Seligman = psicologia positiva, Miller = memoria, Gardner = intelligenze multiple."}
+  {id:14,name:"Sviluppo Psicologico",icon:"👶",cat:"didattica",qa:[
+    {q:"Processi che interagiscono nello sviluppo del bambino:",a:"Biologici, socio-emotivi, cognitivi",e:"Lo sviluppo è sempre multidimensionale: corpo, relazioni/emozioni e mente crescono insieme.",wrong:["Biologici, familiari, individuali","Biologici, socio-emotivi, agonistici","Biologici, cognitivi, familiari"]},
+    {q:"Come si apprende secondo Bandura oltre all'esperienza diretta:",a:"Tramite l'osservazione (modeling)",e:"Bandura = apprendimento osservativo. I bambini imparano guardando gli altri.",wrong:["La ripetizione sistematica","L'ascolto attivo","Il riposo"]},
+    {q:"Stadio che NON fa parte di Piaget:",a:"Stadio pre-motorio (non esiste!)",e:"Piaget: Sensomotorio, Pre-operatorio, Operazioni Concrete, Operazioni Formali. Pre-motorio è inventato.",wrong:["Stadio pre-operatorio","Stadio delle operazioni formali","Stadio delle operazioni concrete"]},
+    {q:"La parola di Vygotskij per lo sviluppo mediato da adulti:",a:"Scaffolding",e:"Impalcatura temporanea che si rimuove quando il bambino regge da solo.",wrong:["Modeling","Bonding","Imagery"]},
+    {q:"Caratteristica del bambino in fase pre-operatoria (Piaget):",a:"Ha una visione prevalentemente egocentrica",e:"Non riesce a vedere il mondo dal punto di vista altrui. Non è ancora cooperativo.",wrong:["Ha una visione prevalentemente cooperativa","È in grado di eseguire operazioni mentali astratte","Prevale il gioco cooperativo"]}
   ]},
-  {id:15,name:"Sviluppo Psicologico del Bambino",icon:"👶",cat:"didattica",qa:[
-    {q:"Processi che interagiscono nello sviluppo del bambino:",a:"Biologici, socio-emotivi, cognitivi",e:"Lo sviluppo è sempre multidimensionale: corpo, relazioni/emozioni e mente crescono insieme."},
-    {q:"Come si apprende secondo Bandura oltre all'esperienza diretta:",a:"Tramite l'osservazione (modeling)",e:"Bandura = apprendimento osservativo. I bambini imparano guardando gli altri."},
-    {q:"Stadio che NON fa parte di Piaget:",a:"Stadio pre-motorio (non esiste!)",e:"Piaget: Sensomotorio, Pre-operatorio, Operazioni Concrete, Operazioni Formali. Pre-motorio è inventato."},
-    {q:"La parola di Vygotskij per lo sviluppo mediato da adulti:",a:"Scaffolding",e:"Impalcatura temporanea che si rimuove quando il bambino regge da solo."},
-    {q:"Caratteristica del bambino in fase pre-operatoria (Piaget):",a:"Ha una visione prevalentemente egocentrica",e:"Non riesce a vedere il mondo dal punto di vista altrui. Non è ancora cooperativo."}
+  {id:15,name:"Le Emozioni",icon:"💫",cat:"didattica",qa:[
+    {q:"Cosa si intende per 'stimolo emotigeno':",a:"Uno stimolo significativo che provoca un'emozione",e:"Non è neutrale. Ha un significato emotivo per quella persona e scatena una risposta emotiva.",wrong:["Uno stimolo neutrale","Uno stimolo che attiva la concentrazione","Uno stimolo fisico intenso"]},
+    {q:"Affermazione corretta sull'emozione:",a:"L'emozione ha una durata temporanea",e:"Le emozioni sono temporanee. Se si protraggono diventano stati d'umore o tratti di personalità.",wrong:["L'emozione è una reazione comportamentale","L'emozione non è legata a uno stimolo","L'emozione è spesso decisa dal soggetto"]},
+    {q:"Le funzioni principali delle emozioni sono:",a:"4 (motivazionale, comunicativa, adattiva, sociale)",e:"Queste 4 funzioni guidano il comportamento e le relazioni dell'essere umano.",wrong:["2","Più di 5","Tante (non numerabili)"]},
+    {q:"L'ordine corretto delle componenti di un'emozione:",a:"Stimolo → Fisiologia → Comportamento → Interpretazione cognitiva",e:"Prima lo stimolo, poi il corpo reagisce, poi si agisce, poi la mente interpreta tutto.",wrong:["Fisiologia → Comportamento → Stimolo → Interpretazione","Comportamento → Stimolo → Fisiologia → Interpretazione","Stimolo → Comportamento → Interpretazione → Fisiologia"]}
   ]},
-  {id:16,name:"Le Emozioni",icon:"💫",cat:"didattica",qa:[
-    {q:"Cosa si intende per 'stimolo emotigeno':",a:"Uno stimolo significativo che provoca un'emozione",e:"Non è neutrale. Ha un significato emotivo per quella persona e scatena una risposta emotiva."},
-    {q:"Affermazione corretta sull'emozione:",a:"L'emozione ha una durata temporanea",e:"Le emozioni sono temporanee. Se si protraggono diventano stati d'umore o tratti di personalità."},
-    {q:"Le funzioni principali delle emozioni sono:",a:"4 (motivazionale, comunicativa, adattiva, sociale)",e:"Queste 4 funzioni guidano il comportamento e le relazioni dell'essere umano."},
-    {q:"L'ordine corretto delle componenti di un'emozione:",a:"Stimolo → Fisiologia → Comportamento → Interpretazione cognitiva",e:"Prima lo stimolo, poi il corpo reagisce (cuore, respiro), poi si agisce, poi la mente interpreta tutto."}
+  {id:16,name:"Triade Genitori-Allievo",icon:"👨‍👩‍👦",cat:"didattica",qa:[
+    {q:"Le tipologie di genitore nel modello POZ (2006):",a:"3",e:"Poco coinvolti, moderatamente coinvolti (zona ottimale), eccessivamente coinvolti.",wrong:["4","2","5"]},
+    {q:"Cosa si intende con 'LENA':",a:"Fatica emotiva, cognitiva e fisica",e:"Triplice fatica dei bambini nello sport: non solo fisica ma anche emotiva e cognitiva.",wrong:["Allenamento finalizzato al miglioramento tecnico","Fatica fisica","Successi e sconfitte"]},
+    {q:"I genitori moderatamente coinvolti nel modello POZ:",a:"Rinforzano l'impegno e hanno un rapporto di fiducia con l'insegnante",e:"Il genitore 'ideale': supporta senza pressioni eccessive, collabora con fiducia.",wrong:["Rinforzano solo i successi","Hanno aspettative molto alte","Sono scarsamente empatici"]}
   ]},
-  {id:17,name:"Triade Genitore-Allievo-Insegnante",icon:"👨‍👩‍👦",cat:"didattica",qa:[
-    {q:"Le tipologie di genitore nel modello POZ (2006):",a:"3 tipologie",e:"Poco coinvolti, moderatamente coinvolti (zona ottimale), eccessivamente coinvolti."},
-    {q:"Cosa si intende con 'LENA':",a:"Fatica emotiva, cognitiva e fisica",e:"Triplice fatica dei bambini nello sport: non solo fisica ma anche emotiva e cognitiva."},
-    {q:"I genitori moderatamente coinvolti nel modello POZ:",a:"Rinforzano l'impegno e hanno un rapporto di fiducia con l'insegnante",e:"Il genitore 'ideale': supporta senza pressioni eccessive, collabora con fiducia."},
-    {q:"La coesione tra i membri di un gruppo è:",a:"La forza di connessione tra i membri",e:"Non è solo intenzione, senso di appartenenza o motivazione. È la forza attrattiva che tiene insieme il gruppo."}
+  {id:17,name:"Comunicazione",icon:"💬",cat:"didattica",qa:[
+    {q:"Il primo assioma della Scuola di Palo Alto:",a:"Non si può non comunicare — tutto comunica sempre, compresi i luoghi",e:"Il silenzio è comunicazione. L'ambiente è comunicazione. Anche un ritardo ha un significato comunicativo.",wrong:["Non si può non comunicare solo tra persone","Non si può non comunicare solo se si sceglie di farlo","La comunicazione è sempre una scelta strategica"]},
+    {q:"Sequenza effetti nello step formativo di avviamento:",a:"Effetto emozionale → cognitivo → conativo",e:"Prima si emoziona (curiosità), poi capisce (elabora), poi agisce. Si parte SEMPRE dall'emozione.",wrong:["Effetto cognitivo → emozionale → conativo","Effetto conativo → emozionale → cognitivo","Non esiste una sequenza predeterminata"]},
+    {q:"Cosa si intende per feedback:",a:"Risposta interna all'insegnante ED esterna dall'insegnante all'allievo",e:"Il feedback è duplice: interno (l'insegnante elabora) ed esterno (comunicazione all'allievo).",wrong:["Solo attività di risposta esterna dall'insegnante","Attività di verifica del grado di interazione","Attività di misurazione del livello relazionale"]},
+    {q:"Sequenza consigliata dei feedback nell'avviamento:",a:"Generico → interrogativo → positivo → di gruppo",e:"Dal generico per non sovraccaricare → fa ragionare → rinforza → condivide con tutti.",wrong:["Specifico → interrogativo → neutro → di gruppo","Specifico → descrittivo → neutro → individuale","Generico → interrogativo → positivo → individuale"]}
   ]},
-  {id:18,name:"Comunicazione",icon:"💬",cat:"didattica",qa:[
-    {q:"Il primo assioma della Scuola di Palo Alto:",a:"Non si può non comunicare — tutto comunica sempre, compresi i luoghi",e:"Il silenzio è comunicazione. L'ambiente è comunicazione. Anche un ritardo ha un significato comunicativo."},
-    {q:"Sequenza effetti nello step formativo di avviamento:",a:"Effetto emozionale → cognitivo → conativo",e:"Prima si emoziona (curiosità), poi capisce (elabora), poi agisce. Si parte SEMPRE dall'emozione."},
-    {q:"Cosa si intende per feedback:",a:"Risposta interna all'insegnante ED esterna dall'insegnante all'allievo",e:"Il feedback è duplice: interno (l'insegnante elabora ciò che osserva) ed esterno (comunicazione all'allievo)."},
-    {q:"Sequenza consigliata dei feedback nell'avviamento:",a:"Generico → interrogativo → positivo → di gruppo",e:"Dal generico per non sovraccaricare → fa ragionare → rinforza → condivide con tutti."},
-    {q:"Relazioni comunicative che pesano di più nel mini-sport:",a:"Tutte (insegnante-allievo, insegnante-genitore, insegnante-dirigente)",e:"Tutte le relazioni contano. Il mini-sport è un ecosistema sociale complesso."}
+  {id:18,name:"Sistemi e Apparati",icon:"❤️",cat:"fisiologia",qa:[
+    {q:"Tipi di circolazione nell'uomo:",a:"2 (polmonare/piccola + sistemica/grande)",e:"Piccola = cuore → polmoni → cuore. Grande = cuore → tutto il corpo → cuore.",wrong:["4","3","1"]},
+    {q:"Le dimensioni del cuore di un tennista/padelista sono uguali al maratoneta?",a:"No — si adattano diversamente",e:"Il maratoneta ha volume interno maggiore. Il padelista ha pareti più spesse (intermittente vs resistenza).",wrong:["Sì, sono uguali","Uguali dopo i 20 anni","Uguali prima dei 20 anni"]},
+    {q:"Quando è opportuno allenarsi rispetto ai pasti:",a:"Al termine della digestione",e:"Allenarsi durante la digestione crea conflitto: il sangue serve sia ai muscoli sia all'apparato digerente.",wrong:["All'inizio della digestione","Nella fase finale della digestione","Sempre, è indifferente"]},
+    {q:"Quale allenamento stressa di più il sistema immunitario:",a:"Allenamento ad altissima intensità",e:"Gli allenamenti intensissimi deprimono temporaneamente il sistema immunitario (open window theory).",wrong:["Allenamento aerobico","Allenamento muscolare","Allenamento a media intensità"]}
   ]},
-  {id:19,name:"Sistemi e Apparati",icon:"❤️",cat:"fisiologia",qa:[
-    {q:"Tipi di circolazione nell'uomo:",a:"2 (polmonare/piccola + sistemica/grande)",e:"Piccola = cuore → polmoni → cuore. Grande = cuore → tutto il corpo → cuore."},
-    {q:"Le dimensioni del cuore di un tennista/padelista sono uguali al maratoneta?",a:"No — si adattano diversamente",e:"Il maratoneta ha volume interno maggiore. Il padelista ha pareti più spesse (intermittente vs resistenza)."},
-    {q:"La ginnastica respiratoria può ridurre l'agitazione?",a:"Sì",e:"La respirazione diaframmatica lenta attiva il sistema nervoso parasimpatico, riducendo l'agitazione."},
-    {q:"Quando è opportuno allenarsi rispetto ai pasti:",a:"Al termine della digestione",e:"Allenarsi durante la digestione crea conflitto: il sangue serve sia ai muscoli sia all'apparato digerente."},
-    {q:"Quale allenamento stressa di più il sistema immunitario:",a:"Allenamento ad altissima intensità",e:"Gli allenamenti intensissimi deprimono temporaneamente il sistema immunitario (open window theory)."}
+  {id:19,name:"Meccanismi Energetici",icon:"⚡",cat:"fisiologia",qa:[
+    {q:"Il meccanismo energetico più potente:",a:"Anaerobico alattacido (sistema fosfageno/ATP-CP)",e:"Dura 0-8 secondi. Usato per scatti esplosivi e smash potenti. Non produce lattato.",wrong:["Meccanismo aerobico","Anaerobico lattacido","Sistema misto"]},
+    {q:"Il meccanismo energetico più duraturo:",a:"Aerobico",e:"Usa ossigeno, produce energia lentamente ma in modo quasi inesauribile. Sistema della resistenza.",wrong:["Anaerobico alattacido","Anaerobico lattacido","Sistema misto"]},
+    {q:"Spostamenti a breve raggio nel padel/tennis entro quanti metri:",a:"3 metri",e:"Nel padel/tennis moltissimi aggiustamenti di posizione avvengono entro 3 m.",wrong:["2 metri","4 metri","5 metri"]},
+    {q:"Spostamenti a medio-lungo raggio entro quanti metri:",a:"6-12 metri",e:"Spostamenti ampi che richiedono accelerazione, decelerazione e cambi di direzione.",wrong:["4-6 metri","5-7 metri","7-9 metri"]}
   ]},
-  {id:20,name:"Meccanismi Energetici",icon:"⚡",cat:"fisiologia",qa:[
-    {q:"Il meccanismo più potente (massima energia in poco tempo):",a:"Anaerobico alattacido (sistema fosfageno/ATP-CP)",e:"Dura 0-8 secondi. Usato per scatti esplosivi e smash potenti. Non produce lattato."},
-    {q:"Il meccanismo più duraturo:",a:"Aerobico",e:"Usa ossigeno, produce energia lentamente ma in modo quasi inesauribile. Sistema della resistenza."},
-    {q:"Il meccanismo anaerobico lattacido produce la maggior quantità di lattato?",a:"Sì",e:"Glicolisi anaerobica 8-90 secondi: genera lattato come sottoprodotto. Causa il 'bruciore' muscolare."},
-    {q:"Spostamenti a breve raggio entro quanti metri:",a:"3 metri",e:"Nel padel/tennis moltissimi aggiustamenti di posizione avvengono entro 3 m."},
-    {q:"Spostamenti a medio-lungo raggio entro quanti metri:",a:"6-12 metri",e:"Spostamenti ampi che richiedono accelerazione, decelerazione e cambi di direzione."}
+  {id:20,name:"Auxologia e Sviluppo",icon:"📏",cat:"fisiologia",qa:[
+    {q:"Nella fase TURGOR si cresce in:",a:"Allungamento (in lunghezza)",e:"Turgor = cresce in altezza. Proceritas = il corpo si stabilizza/allarga. Si alternano in sequenza.",wrong:["Allargamento (in larghezza)","Allungamento e allargamento insieme","Non si cresce in questa fase"]},
+    {q:"La 'fase d'oro' dell'apprendimento motorio:",a:"Dagli 8 agli 11 anni",e:"Cervello plastico, corpo proporzionato, alta motivazione. Momento migliore per schemi motori complessi.",wrong:["Dai 5 ai 7 anni","Dai 12 ai 14 anni","Dai 6 ai 9 anni"]},
+    {q:"Il bambino è più coordinato nella fase Turgor o Proceritas?",a:"Nella fase Turgor",e:"Nella Turgor il corpo è proporzionato. Nella Proceritas cambia più velocemente e la coordinazione può peggiorare.",wrong:["Nella fase Proceritas","In entrambe le fasi","In nessuna delle due"]},
+    {q:"A quale età corrisponde 'l'età della ragione e periodo d'oro della motricità':",a:"7-11 anni",e:"Pensiero logico-concreto di Piaget + massima educabilità motoria in contemporanea.",wrong:["10-12 anni","8-11 anni (NB: qui la risposta è 7-11)","13-14 anni"]}
   ]},
-  {id:21,name:"Auxologia e Sviluppo",icon:"📏",cat:"fisiologia",qa:[
-    {q:"Nella fase TURGOR si cresce in:",a:"Allungamento (in lunghezza)",e:"Turgor = cresce in altezza. Proceritas = il corpo si stabilizza/allarga. Si alternano in sequenza."},
-    {q:"La 'fase d'oro' dell'apprendimento motorio va dagli:",a:"8 agli 11 anni",e:"Cervello plastico, corpo proporzionato, alta motivazione. Momento migliore per schemi motori complessi."},
-    {q:"L'età biologica è sempre uguale a quella cronologica?",a:"No, mai",e:"Un bambino di 10 anni può avere la maturazione di un 8enne o di un 12enne."},
-    {q:"Il bambino è più coordinato nella fase Turgor o Proceritas?",a:"Nella fase Turgor",e:"Nella Turgor il corpo è proporzionato. Nella Proceritas cambia più velocemente e la coordinazione può peggiorare."},
-    {q:"Componente che crea la maggior motivazione nei bambini:",a:"Componente ludica e competitiva (insieme)",e:"Gioco (divertimento intrinseco) + competizione (sfida) insieme sono imbattibili come motivatori."},
-    {q:"A quale età corrisponde 'l'età della ragione e periodo d'oro della motricità':",a:"7-11 anni",e:"Pensiero logico-concreto di Piaget + massima educabilità motoria in contemporanea."}
+  {id:21,name:"Sport Vision",icon:"👁️",cat:"fisiologia",qa:[
+    {q:"Le informazioni che passano dal canale visivo:",a:"83% — la visione domina su tutti gli altri sensi",e:"Gli altri sensi contribuiscono per il 17%. La visione è il senso dominante nell'uomo.",wrong:["3%","11%","2%"]},
+    {q:"I canali di apprendimento sono:",a:"Visivo, uditivo e cinestesico",e:"VAC: ogni persona ha il suo canale preferenziale. Un buon istruttore usa tutti e tre.",wrong:["Solo visivo","Solo cinestesico","Solo uditivo"]},
+    {q:"L'accomodazione visiva è:",a:"La capacità di variare la messa a fuoco da lontano a vicino e viceversa",e:"Fondamentale nel padel per seguire la palla che si avvicina rapidamente.",wrong:["La capacità di vedere in condizioni di scarsa luce","La velocità di reazione agli stimoli visivi","La visione periferica del campo"]}
   ]},
-  {id:22,name:"Sport Vision",icon:"👁️",cat:"fisiologia",qa:[
-    {q:"Le informazioni che passano dal canale visivo:",a:"83% — la visione domina su tutti gli altri sensi",e:"Gli altri sensi contribuiscono per il 17%. La visione è il senso dominante nell'uomo."},
-    {q:"I canali di apprendimento sono:",a:"Visivo, uditivo e cinestesico",e:"VAC: ogni persona ha il suo canale preferenziale. Un buon istruttore usa tutti e tre."},
-    {q:"La visione è innata e immutabile?",a:"No — si può educare, potenziare, allenare e migliorare",e:"Come un muscolo: con la pratica specifica migliora. Non è fissa."},
-    {q:"L'accomodazione visiva è:",a:"La capacità di variare la messa a fuoco da lontano a vicino e viceversa",e:"Fondamentale nel padel per seguire la palla che si avvicina rapidamente."},
-    {q:"Il BDNF è:",a:"Brain-Derived Neurotrophic Factor — proteina prodotta dall'esercizio fisico",e:"Favorisce la neuroplasticità e la crescita neuronale. 'Fertilizzante del cervello'."}
+  {id:22,name:"Mini Padel e Junior Program",icon:"🏓",cat:"padel",qa:[
+    {q:"L'area mentale appartiene al principio di:",a:"Multilateralità",e:"La multilateralità abbraccia tutte le aree: Mentale, Motoria, Tattica, Tecnica.",wrong:["Multiformità","Specificità dell'apprendimento","Multidisciplinarietà"]},
+    {q:"Misure del campo da minipadel RED:",a:"4 x 10 metri",e:"Il campo più piccolo per i più piccoli. 4m larghezza, 10m lunghezza.",wrong:["5 x 8 metri","4 x 4 metri","7 x 14 metri"]},
+    {q:"Quanti campi RED si possono ricavare da 1 campo padel standard:",a:"4 campi RED",e:"Questa moltiplicazione degli spazi permette a più bambini di praticare contemporaneamente.",wrong:["2 campi","6 campi","8 campi"]},
+    {q:"Passi del quaderno didattico del Mini Padel:",a:"10 passi",e:"Un percorso strutturato in 10 step progressivi.",wrong:["12 passi","8 passi","14 passi"]},
+    {q:"L'argomento del secondo passo nel quaderno del Mini Padel:",a:"Diritto e Rovescio",e:"Il secondo passo introduce i colpi fondamentali dopo la fase iniziale.",wrong:["Servizio e Risposta","Volée Diritto e Rovescio","Parete Diritto e Rovescio"]}
   ]},
-  {id:23,name:"Mini Padel e Junior Program",icon:"🏓",cat:"padel",qa:[
-    {q:"L'area mentale appartiene al principio di:",a:"Multilateralità",e:"La multilateralità abbraccia tutte le aree: Mentale, Motoria, Tattica, Tecnica."},
-    {q:"Misure del campo da minipadel RED:",a:"4 x 10 metri",e:"Il campo più piccolo per i più piccoli. 4m larghezza, 10m lunghezza."},
-    {q:"La fase didattica del minipadel si riferisce di solito a:",a:"Bambini dai 5 ai 6 anni",e:"La fase più precoce. Non è limitata agli under 8."},
-    {q:"Quanti campi RED si possono ricavare da 1 campo padel standard:",a:"4 campi RED",e:"Questa moltiplicazione degli spazi permette a più bambini di praticare contemporaneamente."},
-    {q:"Passi del quaderno didattico del Mini Padel:",a:"10 passi",e:"Un percorso strutturato in 10 step progressivi."},
-    {q:"L'argomento del secondo passo nel quaderno del Mini Padel:",a:"Diritto e Rovescio",e:"Il secondo passo introduce i colpi fondamentali dopo la fase iniziale di familiarizzazione."},
-    {q:"Aree di riferimento del Mini Padel:",a:"Mentale - Fisica - Tattica - Tecnica",e:"Nota: qui compare 'Fisica' invece di 'Motoria'. Attenzione alla terminologia specifica del minipadel!"}
+  {id:23,name:"Area Tattica",icon:"🎯",cat:"padel",qa:[
+    {q:"L'elemento fondamentale negli sport di situazione:",a:"Lo spazio-tempo",e:"Tutto dipende dalla gestione dello spazio (dove) e del tempo (quando colpisco, quanto ho per reagire).",wrong:["Esercitazioni a blocchi","Metodo analitico","Tutte le risposte sono errate"]},
+    {q:"Il concetto di consistenza è il trinomio:",a:"Controllo → Regolarità → Precisione",e:"La consistenza nel padel si costruisce con questi tre elementi in questo ordine.",wrong:["Controllo → Profondità → Traiettoria","Controllo → Regolarità → Direzione","Controllo → Regolarità → Profondità"]},
+    {q:"La zona GIALLA nelle fasi di gioco è:",a:"La zona di transizione",e:"Rosso = fondo/difesa. Giallo = transizione. Verde = rete/attacco.",wrong:["La zona di rete","La zona di fondo campo","Nessuna risposta è corretta"]},
+    {q:"Le situazioni di gioco nel padel sono:",a:"Servizio – Risposta – Fondo – Rete – Transizione avanti e indietro",e:"Le 6 situazioni fondamentali del padel.",wrong:["Servizio – Risposta – Volée Diritto – Volée Rovescio – Transizione","Servizio – Risposta – Rete – Transizione avanti e indietro","Servizio – Risposta – Diritto – Rovescio – Rete – Transizione avanti"]}
   ]},
-  {id:24,name:"Area Tattica",icon:"🎯",cat:"padel",qa:[
-    {q:"L'elemento fondamentale negli sport di situazione:",a:"Lo spazio-tempo",e:"Tutto dipende dalla gestione dello spazio (dove) e del tempo (quando colpisco, quanto ho per reagire)."},
-    {q:"Il concetto di consistenza è il trinomio:",a:"Controllo → Regolarità → Precisione",e:"La consistenza nel padel si costruisce con questi tre elementi in questo ordine."},
-    {q:"La zona GIALLA nelle fasi di gioco è:",a:"La zona di transizione",e:"Rosso = fondo/difesa. Giallo = transizione. Verde = rete/attacco."},
-    {q:"Quale NON è un elemento della gestione dello spazio-tempo:",a:"Impugnatura",e:"Gestione spazio-tempo include: Traiettoria, Direzione, Profondità. L'impugnatura è un prerequisito tecnico."},
-    {q:"Le situazioni di gioco nel padel sono:",a:"Servizio – Risposta – Fondo – Rete – Transizione avanti e indietro",e:"Le 6 situazioni fondamentali del padel."}
+  {id:24,name:"Area Tecnica",icon:"🔧",cat:"padel",qa:[
+    {q:"Quale NON è un prerequisito della tecnica:",a:"Impatto",e:"I prerequisiti sono: Impugnatura, Posizione di Partenza, Studio della Palla. L'impatto è esecuzione.",wrong:["Impugnatura","Posizione di partenza","Studio della palla"]},
+    {q:"Quale è un prerequisito della tecnica:",a:"Impugnatura",e:"La fondamenta di tutta la tecnica. Prima di qualsiasi colpo si deve tenere correttamente la racchetta.",wrong:["Regolarità","Precisione","Profondità"]},
+    {q:"Un colpo 'in cooperazione' nel padel:",a:"Pallonetto con parete",e:"I colpi in cooperazione sfruttano le pareti del campo — caratteristica unica del padel.",wrong:["Pallonetto senza parete","Volée","Bandeja"]},
+    {q:"Per facilitare l'apprendimento del ritmo esecutivo:",a:"Far eseguire movimenti brevi",e:"Movimenti brevi e controllati facilitano il timing del colpo. I movimenti ampi creano confusione.",wrong:["Far eseguire movimenti ampi","Far eseguire movimenti randomizzati improvvisi","Proporre sempre gli stessi movimenti"]}
   ]},
-  {id:25,name:"Area Tecnica",icon:"🔧",cat:"padel",qa:[
-    {q:"Quale NON è un prerequisito della tecnica:",a:"Impatto",e:"I prerequisiti sono: Impugnatura, Posizione di Partenza, Studio della Palla. L'impatto è esecuzione, non prerequisito."},
-    {q:"Quale è un prerequisito della tecnica:",a:"Impugnatura",e:"La fondamenta di tutta la tecnica. Prima di qualsiasi colpo si deve tenere correttamente la racchetta."},
-    {q:"Un colpo 'in cooperazione' nel padel:",a:"Pallonetto con parete",e:"I colpi in cooperazione sfruttano le pareti del campo — caratteristica unica del padel."},
-    {q:"Quale è un obiettivo della Tecnica:",a:"Azione dell'arto non dominante",e:"L'arto non dominante (braccio libero) aiuta equilibrio e rotazione. Controllo/Traiettoria sono obiettivi tattici."},
-    {q:"Per facilitare l'apprendimento del ritmo esecutivo:",a:"Far eseguire movimenti brevi",e:"Movimenti brevi e controllati facilitano il timing del colpo. I movimenti ampi creano confusione."}
+  {id:25,name:"Stili di Insegnamento",icon:"👨‍🏫",cat:"didattica",qa:[
+    {q:"Il rischio dello stile prescrittivo:",a:"Creare un colpitore, non un giocatore tatticamente completo",e:"Sviluppa gesti tecnici ma non il pensiero tattico. Bel colpitore che non sa cosa fare in partita.",wrong:["Non c'è rischio, è la metodologia ottimale","Creare un giocatore e non un colpitore","Creare un giocatore improntato solo alla tattica"]},
+    {q:"Nel Game Based Approach la sequenza ottimale è:",a:"Introduzione al gioco → Partita → Fase di intervento",e:"Si inizia con il gioco, si lascia giocare (emergono i problemi), poi si interviene.",wrong:["Fase di intervento → partita","Introduzione al gioco → partita → fase di intervento (corretto!)","Partita → fase di intervento → introduzione al gioco"]},
+    {q:"L'obiettivo principale dello stile prescrittivo:",a:"Apprendimento del modello tecnico ottimale",e:"Efficace per la tecnica di base ma insufficiente per lo sviluppo completo del giocatore.",wrong:["Apprendimento individualizzato","Giocare molte partite per correggere la tattica","Correzione solo in presenza di eccesso di errore"]}
   ]},
-  {id:26,name:"Stili di Insegnamento",icon:"👨‍🏫",cat:"didattica",qa:[
-    {q:"Il rischio dello stile prescrittivo:",a:"Creare un colpitore, non un giocatore tatticamente completo",e:"Sviluppa gesti tecnici ma non il pensiero tattico. Bel colpitore che non sa cosa fare in partita."},
-    {q:"Nel Game Based Approach la sequenza ottimale è:",a:"Introduzione al gioco → Partita → Fase di intervento",e:"Si inizia con il gioco, si lascia giocare (emergono i problemi), poi si interviene. L'apprendimento nasce dal bisogno reale."},
-    {q:"L'obiettivo principale dello stile prescrittivo:",a:"Apprendimento del modello tecnico ottimale",e:"Efficace per la tecnica di base ma insufficiente per lo sviluppo completo del giocatore."},
-    {q:"Per uno stile 'Scoperta Guidata' corretto si usa:",a:"Apprendimento individualizzato, correzione solo in presenza di eccesso di errore, feedback interrogativi",e:"La Scoperta Guidata fa ragionare l'allievo: non dice cosa fare ma guida a scoprirlo autonomamente."}
+  {id:26,name:"Storia del Padel",icon:"🏆",cat:"padel",qa:[
+    {q:"Anno di nascita della Federazione Internazionale di Padel (FIP):",a:"1991",e:"La FIP nasce nel 1991. Il padel come sport nasce prima (anni '60-'70 in Messico).",wrong:["1981","2001","2011"]},
+    {q:"Migliore piazzamento della nazionale maschile italiana ai mondiali:",a:"Terzo posto",e:"Eccellente risultato considerando la competitività di Argentina e Spagna.",wrong:["Quarto posto","Secondo posto","Primo posto"]},
+    {q:"Cosa avvenne nel 2022:",a:"La FIT cambia nome in Federazione Italiana Tennis e Padel (F.I.T.P.)",e:"Svolta storica: riconoscimento ufficiale del padel nella federazione italiana.",wrong:["L'Italia vince il mondiale di padel","Non avviene nulla di significativo","Il CONI riconosce il Settore padel"]},
+    {q:"Perché il 2019 è un anno storico per il padel italiano:",a:"L'Italia si aggiudica la prima medaglia europea",e:"Prima medaglia agli Europei di Padel — pietra miliare del padel italiano.",wrong:["L'Italia vince l'Europeo per la prima volta","L'Italia si aggiudica la prima medaglia mondiale","La Federazione italiana cambia nome"]}
   ]},
-  {id:27,name:"Storia del Padel",icon:"🏆",cat:"padel",qa:[
-    {q:"Anno di nascita della Federazione Internazionale di Padel (FIP):",a:"1991",e:"La FIP nasce nel 1991. Il padel come sport nasce prima (anni '60-'70 in Messico con Enrique Corcuera)."},
-    {q:"Migliore piazzamento della nazionale maschile italiana ai mondiali:",a:"Terzo posto",e:"Eccellente risultato considerando la competitività di Argentina e Spagna che dominano."},
-    {q:"Cosa avvenne nel 2022:",a:"La FIT cambia nome in Federazione Italiana Tennis e Padel (F.I.T.P.)",e:"Svolta storica: riconoscimento ufficiale del padel nella federazione italiana."},
-    {q:"Perché il 2019 è un anno storico per il padel italiano:",a:"L'Italia si aggiudica la prima medaglia europea",e:"Prima medaglia agli Europei di Padel — pietra miliare del padel italiano."},
-    {q:"Come si è piazzata la nazionale femminile nei mondiali 2021-2022-2023-2024:",a:"Al terzo posto",e:"Stabilmente sul podio mondiale — un risultato eccellente considerando Argentina e Spagna."}
+  {id:27,name:"Regole di Padel",icon:"📜",cat:"regole",qa:[
+    {q:"Tempo entro cui un giocatore assente viene dichiarato tale:",a:"15 minuti dalla chiamata",e:"Il regolamento FITP prevede 15 minuti di attesa dalla chiamata.",wrong:["5 minuti","10 minuti","20 minuti"]},
+    {q:"Dopo sospensione di 18 min per pioggia, minuti di palleggio accordati:",a:"3 minuti",e:"Per sospensioni 10-30 min circa = 3 minuti di palleggio preliminare.",wrong:["Nessun palleggio è concesso","5 minuti","2 minuti"]},
+    {q:"Con 3 violazioni del codice di condotta si va incontro a:",a:"Avvertimento con perdita del GIOCO",e:"1° = avvertimento. 2° = perdita del punto. 3° = perdita del gioco. Oltre = squalifica.",wrong:["Avvertimento con sanzione pecuniaria","Avvertimento con perdita del punto","Avvertimento con squalifica"]},
+    {q:"Dimensioni zona di sicurezza per gioco all'esterno:",a:"2m larghezza, 4m lunghezza, 3m altezza",e:"Questa combinazione garantisce la sicurezza di giocatori e spettatori.",wrong:["3m larghezza, 4m lunghezza, 2m altezza","4m larghezza, 3m lunghezza, 2m altezza","2m larghezza, 3m lunghezza, 4m altezza"]}
   ]},
-  {id:28,name:"Il Sistema Italia",icon:"🇮🇹",cat:"organizzazione",qa:[
-    {q:"L'innovazione del Sistema Italia:",a:"Coinvolgere simultaneamente settore tecnico nazionale e formazione insegnanti",e:"Un sistema unico: insegnanti e tecnici crescono insieme ai loro allievi. Non è solo organizzazione territoriale."},
-    {q:"Il progetto 'Racchette in classe' a chi si rivolge:",a:"Scuole d'infanzia, elementari, medie e superiori",e:"Un progetto inclusivo che copre tutto l'arco scolastico. Non è limitato a una fascia."},
-    {q:"Cos'è il Sistema Italia:",a:"Un sistema territoriale organizzativo, didattico-formativo",e:"Struttura completa: organizzazione territoriale + didattica + formazione insegnanti. Non solo un circuito agonistico."}
+  {id:28,name:"Regolamenti e Tornei",icon:"📋",cat:"regole",qa:[
+    {q:"Un giocatore senza tessera può giocare?",a:"Sì, con dichiarazione liberatoria e tassa sub-judice",e:"Deve firmare e pagare una tassa condizionata alla verifica della tessera.",wrong:["No, assolutamente","Sì, con il solo pagamento della tassa","Sì, con dichiarazione liberatoria e pagamento a fondo perduto"]},
+    {q:"Un incontro può essere interrotto dai giocatori d'accordo per pioggia?",a:"No — decide il direttore di gara",e:"I giocatori non possono decidere autonomamente di interrompere la partita.",wrong:["Sì, se sono d'accordo","Decide il giocatore che serve","Decide il giocatore che risponde"]},
+    {q:"Un under 10 a che tipologie di tornei può partecipare:",a:"Under e quarta categoria",e:"Non a tutte le categorie. Solo la propria categoria (under) e la quarta.",wrong:["Solo under 10","Solo under (qualsiasi)","Qualunque tipologia"]},
+    {q:"Sospensioni per il bagno previste:",a:"1 per gli uomini, 2 per le donne",e:"Trattamento differenziato per esigenze fisiologiche diverse.",wrong:["Quante volte sono necessarie","Due per gli uomini e due per le donne","Una ogni set"]}
   ]},
-  {id:29,name:"Regole di Padel",icon:"📜",cat:"regole",qa:[
-    {q:"Tempo entro cui un giocatore assente viene dichiarato tale:",a:"15 minuti dalla chiamata",e:"Il regolamento FITP prevede 15 minuti di attesa dalla chiamata. Superato, perde a tavolino."},
-    {q:"Dopo sospensione di 18 min per pioggia, minuti di palleggio accordati:",a:"3 minuti",e:"Per sospensioni 10-30 min circa = 3 minuti di palleggio preliminare. Per sospensioni più lunghe = 5 min."},
-    {q:"Con 3 violazioni del codice di condotta si va incontro a:",a:"Avvertimento con perdita del GIOCO",e:"1° = avvertimento. 2° = perdita del punto. 3° = perdita del gioco. Oltre = squalifica."},
-    {q:"Dimensioni zona di sicurezza per gioco all'esterno:",a:"2m larghezza, 4m lunghezza, 3m altezza",e:"Questa combinazione garantisce la sicurezza di giocatori e spettatori."},
-    {q:"In 2° di servizio: palla rimbalza nel campo giusto poi colpisce la rete metallica:",a:"Punto alla coppia in ribattuta",e:"La palla è entrata validamente. Il ricevente può giocarla. Se non la colpisce, punto alla coppia al servizio."}
+  {id:29,name:"Ufficiali di Gara",icon:"🏅",cat:"regole",qa:[
+    {q:"Cosa NON è vietato agli ufficiali di gara:",a:"Essere designati fuori dalla propria regione di competenza",e:"Gli ufficiali possono operare anche fuori regione. È vietato gareggiare dove dirigono, parlare male dei colleghi, operare in manifestazioni non FITP.",wrong:["Gareggiare nella manifestazione da essi diretta","Parlare male dei colleghi","Svolgere funzioni in manifestazioni non autorizzate dalla FITP"]},
+    {q:"Il giudice arbitro può essere l'autorità finale per le questioni di fatto:",a:"Quando è sul campo e NON è presente l'arbitro",e:"Se c'è l'arbitro di sedia, lui decide sulle questioni di fatto. Il GA subentra solo se assente.",wrong:["Sempre, in ogni caso","Quando è sul campo ed è presente l'arbitro","Mai, in nessun caso"]},
+    {q:"Quante volte un giocatore può avere l'interruzione per crampi in un incontro:",a:"Una volta, ma solo al naturale cambio campo o riposo fine partita",e:"I crampi non danno diritto a interruzione immediata. Si gestisce al cambio campo/fine set e solo una volta.",wrong:["Una volta in qualsiasi momento","A fine set","Mai — i crampi non danno diritto a interruzione"]}
   ]},
-  {id:30,name:"Regolamenti e Tornei",icon:"📋",cat:"regole",qa:[
-    {q:"Un giocatore senza tessera può giocare?",a:"Sì, con dichiarazione liberatoria e tassa sub-judice",e:"Deve firmare e pagare una tassa condizionata alla verifica della tessera."},
-    {q:"Chi si ritira dopo la chiusura iscrizioni ma prima del torneo deve pagare la quota?",a:"Sì, e deve anche giustificare l'assenza",e:"Non ci sono eccezioni automatiche: si paga la quota e si giustifica il ritiro."},
-    {q:"Un incontro può essere interrotto dai giocatori d'accordo per pioggia?",a:"No — decide il direttore di gara",e:"I giocatori non possono decidere autonomamente di interrompere la partita."},
-    {q:"Un under 10 a che tipologie di tornei può partecipare:",a:"Under e quarta categoria",e:"Non a tutte le categorie. Solo la propria categoria (under) e la quarta."},
-    {q:"Sospensioni per il bagno previste:",a:"1 per gli uomini, 2 per le donne",e:"Trattamento differenziato per esigenze fisiologiche diverse."}
+  {id:30,name:"Alimentazione",icon:"🥗",cat:"fisiologia",qa:[
+    {q:"Il significato originale di 'dieta':",a:"Stile di vita — insieme di norme per mantenere la salute (dal greco δίαιτα)",e:"Non era una restrizione alimentare! Era alimentazione + esercizio + riposo. Un concetto olistico.",wrong:["Rigido regime per perdere peso","Prescrizione di indicazioni alimentari specifiche","Insieme di norme per la sicurezza degli alimenti"]},
+    {q:"Una dieta varia ed equilibrata basta per uno sportivo?",a:"Sì, soddisfa le esigenze nutrizionali di chi pratica sport",e:"Per la maggioranza degli sportivi amatoriali non servono integratori di routine.",wrong:["No, deve sempre integrare con proteine","È raccomandata solo a chi non fa sport","È controindicata per atleti"]},
+    {q:"Porzione standard di latte e yogurt:",a:"125 g o 125 ml",e:"Non 250 ml (troppo) né 25 g (troppo poco). Un vasetto standard.",wrong:["25 g o 25 ml","150 g o 150 ml","250 g o 250 ml"]},
+    {q:"I legumi appartengono al gruppo alimentare:",a:"Gruppo III, come le carni e i prodotti della pesca",e:"I legumi sono nel gruppo III (proteine) per l'alto contenuto proteico.",wrong:["Gruppo IV, insieme al latte e derivati","Gruppo I, con riso e patate","Gruppo V, come gli oli e il burro"]}
   ]}
 ];
 
@@ -419,20 +480,20 @@ const NUMBERS_DATA = [
   {val:"1:2/3",lbl:"Rapporto Perfez.",ctx:"1 insegnante per 2-3 allievi"},
   {val:"3",lbl:"Parti della lezione",ctx:"Iniziale, centrale, finale"},
   {val:"M→M→T→T",lbl:"Ordine multilateralità",ctx:"Mentale→Motoria→Tattica→Tecnica"},
-  {val:"5",lbl:"Tipologie scuole tennis",ctx:"Club-Basic-Standard-Super-Top"},
-  {val:"3",lbl:"Tipologie scuole padel",ctx:"Club-Basic-Standard"},
+  {val:"5",lbl:"Scuole tennis",ctx:"Club-Basic-Standard-Super-Top"},
+  {val:"3",lbl:"Scuole padel",ctx:"Club-Basic-Standard"},
   {val:"1991",lbl:"Nascita FIP",ctx:"Federazione Internazionale di Padel"},
   {val:"2022",lbl:"FIT → FITP",ctx:"Riconoscimento ufficiale del padel"},
-  {val:"83%",lbl:"Canale visivo",ctx:"Percentuale info che passano dalla visione"},
-  {val:"4",lbl:"Fonti autoefficacia",ctx:"Successi, modelli, persuasione, stati fisiologici"},
+  {val:"83%",lbl:"Canale visivo",ctx:"Info che passano dalla visione"},
+  {val:"4",lbl:"Fonti autoefficacia",ctx:"Successi, modelli, persuasione, fisiologia"},
   {val:"2",lbl:"Circolazioni umane",ctx:"Polmonare + sistemica"},
   {val:"8-11",lbl:"Fase d'oro (anni)",ctx:"Massima educabilità motoria"},
   {val:"4",lbl:"Funzioni emozioni",ctx:"Motivazionale, comunicativa, adattiva, sociale"},
   {val:"3",lbl:"Tipologie genitori POZ",ctx:"Poco, moderatamente, eccessivamente coinvolti"},
-  {val:"3 m",lbl:"Spostamenti breve raggio",ctx:"Aggiustamenti piccoli in campo"},
+  {val:"3 m",lbl:"Spostamenti brevi",ctx:"Aggiustamenti piccoli in campo"},
   {val:"6-12 m",lbl:"Medio-lungo raggio",ctx:"Spostamenti ampi con cambio direzione"},
-  {val:"10",lbl:"Passi quaderno Mini Padel",ctx:"Percorso didattico strutturato"},
-  {val:"4×10",lbl:"Campo RED (metri)",ctx:"4m larghezza × 10m lunghezza"},
+  {val:"10",lbl:"Passi Mini Padel",ctx:"Quaderno didattico strutturato"},
+  {val:"4×10",lbl:"Campo RED (m)",ctx:"4m larghezza × 10m lunghezza"},
   {val:"4",lbl:"Campi RED",ctx:"Da 1 campo padel si ricavano 4 campi RED"},
   {val:"15 min",lbl:"Attesa giocatore assente",ctx:"Poi viene dichiarato assente a tavolino"},
   {val:"125 ml",lbl:"Porzione latte/yogurt",ctx:"Standard LARN consigliato"},
@@ -449,341 +510,521 @@ const PLAN_DAYS = [
   {n:7,topics:"Mini Padel, Tattica, Regole, Regolamenti",method:"Simulazione test finale"}
 ];
 
-// ========================
-// PROGRESS (localStorage)
-// ========================
-const LS_KEY = 'fitp_progress_v2';
-let progress = {};
+// ============================
+// STORAGE
+// ============================
+const LS = 'fitp_v3';
+let store = {};
+function load() { try { store = JSON.parse(localStorage.getItem(LS)) || {}; } catch(e) { store = {}; } }
+function save() { localStorage.setItem(LS, JSON.stringify(store)); }
 
-function loadProgress() {
-  try { progress = JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch(e) { progress = {}; }
-}
-function saveProgress() {
-  localStorage.setItem(LS_KEY, JSON.stringify(progress));
-}
-function markQA(secId, qaIdx, val) {
-  if(!progress[secId]) progress[secId] = {};
-  progress[secId][qaIdx] = val;
-  saveProgress();
-}
-function isQARead(secId, qaIdx) { return !!(progress[secId] && progress[secId][qaIdx]); }
-function getSectionPct(secId) {
-  const sec = SECTIONS.find(s=>s.id===secId);
-  if(!sec) return 0;
-  const read = sec.qa.filter((_,i)=>isQARead(secId,i)).length;
-  return Math.round((read/sec.qa.length)*100);
-}
-function isDayDone(dayN) {
-  const key = 'day_'+dayN;
-  return progress[key] === true;
-}
-function toggleDay(dayN) {
-  const key = 'day_'+dayN;
-  progress[key] = !progress[key];
-  saveProgress();
-  renderHome();
-}
-function getTotalRead() {
-  return SECTIONS.reduce((acc,sec)=>acc+(sec.qa.filter((_,i)=>isQARead(sec.id,i)).length),0);
-}
-function getTotalQA() { return SECTIONS.reduce((acc,sec)=>acc+sec.qa.length,0); }
+// Theme
+function getTheme() { return store.theme || 'dark'; }
+function setTheme(t) { store.theme = t; save(); applyTheme(); }
+function applyTheme() { document.documentElement.setAttribute('data-theme', getTheme()); }
+function toggleTheme() { setTheme(getTheme() === 'dark' ? 'light' : 'dark'); renderHome(); }
 
-// ========================
+// Read progress
+function isRead(sid, qi) { return !!(store['r_'+sid] && store['r_'+sid][qi]); }
+function toggleRead(sid, qi) {
+  if (!store['r_'+sid]) store['r_'+sid] = {};
+  store['r_'+sid][qi] = !store['r_'+sid][qi];
+  save();
+  const card = document.getElementById('qcard_'+sid+'_'+qi);
+  const btn = document.getElementById('rbtn_'+sid+'_'+qi);
+  if(card) card.className = 'qa-card'+(store['r_'+sid][qi]?' read':'');
+  if(btn) { btn.className='mark-read-btn'+(store['r_'+sid][qi]?' done':''); btn.innerHTML=store['r_'+sid][qi]?'✓ Studiata ':'○ Segna come studiata'; }
+  const meta = document.getElementById('detail_meta');
+  if(meta) { const sec=SECTIONS.find(s=>s.id===sid); meta.textContent=sec.qa.length+' domande · '+secPct(sid)+'% completato'; }
+}
+function secPct(sid) {
+  const s = SECTIONS.find(x=>x.id===sid);
+  if(!s) return 0;
+  const r = s.qa.filter((_,i)=>isRead(sid,i)).length;
+  return Math.round(r/s.qa.length*100);
+}
+function totalRead() { return SECTIONS.reduce((a,s)=>a+s.qa.filter((_,i)=>isRead(s.id,i)).length,0); }
+function totalQA() { return SECTIONS.reduce((a,s)=>a+s.qa.length,0); }
+
+// Day plan
+function dayDone(n) { return !!store['day_'+n]; }
+function toggleDay(n) { store['day_'+n]=!store['day_'+n]; save(); renderHome(); }
+
+// Quiz history
+function getHistory() { return store.quizHistory || []; }
+function saveQuizResult(result) {
+  if(!store.quizHistory) store.quizHistory=[];
+  store.quizHistory.unshift(result);
+  if(store.quizHistory.length>20) store.quizHistory=store.quizHistory.slice(0,20);
+  save();
+}
+
+// ============================
 // NAVIGATION
-// ========================
-let currentScreen = 'home';
+// ============================
+let currentNav = 'home';
 function goTo(name, btn) {
   document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('screen-'+name).style.display='block';
   if(btn) btn.classList.add('active');
-  currentScreen = name;
+  currentNav = name;
+  const el = document.getElementById('screen-'+name);
+  el.scrollTop = 0;
   if(name==='home') renderHome();
-  if(name==='sezioni') renderSections('');
-  if(name==='flash') initFlash();
-  if(name==='numeri') renderNums();
-  document.getElementById('screen-'+name).scrollTop = 0;
+  else if(name==='sezioni') renderSezioni('');
+  else if(name==='flash') initFlash();
+  else if(name==='quiz') renderQuizStart();
+  else if(name==='numeri') renderNumeri();
 }
-
-function goToDetail(secId) {
+function goDetail(sid) {
   document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
   document.getElementById('screen-detail').style.display='block';
-  renderDetail(secId);
   document.getElementById('screen-detail').scrollTop=0;
+  renderDetail(sid);
 }
-function backToSezioni() {
+function backSezioni() {
   document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
   document.getElementById('screen-sezioni').style.display='block';
 }
 
-// ========================
+// ============================
 // HOME
-// ========================
+// ============================
 function renderHome() {
-  const totalRead = getTotalRead();
-  const totalQA = getTotalQA();
-  const totalPct = Math.round((totalRead/totalQA)*100);
-  const doneCount = SECTIONS.filter(s=>getSectionPct(s.id)===100).length;
+  const tRead=totalRead(), tQA=totalQA(), tPct=Math.round(tRead/tQA*100);
+  const doneCount=SECTIONS.filter(s=>secPct(s.id)===100).length;
+  const isDark=getTheme()==='dark';
+  const cats=['organizzazione','didattica','fisiologia','padel','regole'];
+  const catLabels={organizzazione:'Organizzazione',didattica:'Didattica',fisiologia:'Fisiologia',padel:'Padel',regole:'Regole'};
 
-  let html = `
+  let h=`
   <div class="home-hero">
-    <div class="hero-badge">🎾 Esame FITP · Istruttore 1° Livello</div>
+    <div class="page-header-row" style="margin-bottom:12px">
+      <div class="hero-badge">🎾 FITP · Istruttore 1° Livello</div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambia tema">${isDark?'☀️':'🌙'}</button>
+    </div>
     <div class="hero-title">Guida Padel</div>
-    <div class="hero-sub">Tutte le risposte con spiegazioni, flashcard e piano in 7 giorni.</div>
+    <div class="hero-sub">Tutte le risposte con spiegazioni, flashcard, quiz e piano in 7 giorni.</div>
   </div>
   <div class="stats-row">
     <div class="stat-card"><div class="stat-val">${SECTIONS.length}</div><div class="stat-lbl">Sezioni</div></div>
-    <div class="stat-card"><div class="stat-val">${totalRead}</div><div class="stat-lbl">Lette</div></div>
-    <div class="stat-card"><div class="stat-val">${totalPct}%</div><div class="stat-lbl">Completato</div></div>
+    <div class="stat-card"><div class="stat-val">${tRead}</div><div class="stat-lbl">Lette</div></div>
+    <div class="stat-card"><div class="stat-val">${tPct}%</div><div class="stat-lbl">Completato</div></div>
   </div>
-  <div class="prog-section">
-    <div class="section-label">Progresso generale</div>
-    <div class="prog-card">
-      <div class="prog-top"><span class="prog-name">Domande studiate</span><span class="prog-pct">${totalRead} / ${totalQA}</span></div>
-      <div class="prog-bar-wrap"><div class="prog-bar ${totalPct===100?'done':''}" style="width:${totalPct}%"></div></div>
-      <div class="prog-meta">${doneCount} sezioni completate su ${SECTIONS.length}</div>
-    </div>`;
+  <div class="section-label">Progresso generale</div>
+  <div class="prog-card">
+    <div class="prog-top"><span class="prog-name">Domande studiate</span><span class="prog-pct">${tRead} / ${tQA}</span></div>
+    <div class="prog-bar-wrap"><div class="prog-bar${tPct===100?' done':''}" style="width:${tPct}%"></div></div>
+    <div class="prog-meta">${doneCount} sezioni completate su ${SECTIONS.length}</div>
+  </div>`;
 
-  const cats = [...new Set(SECTIONS.map(s=>s.cat))];
-  const catLabels = {organizzazione:'Organizzazione',didattica:'Didattica',fisiologia:'Fisiologia',padel:'Padel',regole:'Regole'};
   cats.forEach(cat=>{
-    const secs = SECTIONS.filter(s=>s.cat===cat);
-    const total = secs.reduce((a,s)=>a+s.qa.length,0);
-    const read = secs.reduce((a,s)=>a+s.qa.filter((_,i)=>isQARead(s.id,i)).length,0);
-    const pct = total>0?Math.round((read/total)*100):0;
-    html += `
-    <div class="prog-card">
-      <div class="prog-top"><span class="prog-name">${catLabels[cat]||cat}</span><span class="prog-pct">${pct}%</span></div>
-      <div class="prog-bar-wrap"><div class="prog-bar ${pct===100?'done':''}" style="width:${pct}%"></div></div>
-      <div class="prog-meta">${read} / ${total} domande</div>
+    const secs=SECTIONS.filter(s=>s.cat===cat);
+    const tot=secs.reduce((a,s)=>a+s.qa.length,0);
+    const rd=secs.reduce((a,s)=>a+s.qa.filter((_,i)=>isRead(s.id,i)).length,0);
+    const p=tot>0?Math.round(rd/tot*100):0;
+    h+=`<div class="prog-card">
+      <div class="prog-top"><span class="prog-name">${catLabels[cat]}</span><span class="prog-pct">${p}%</span></div>
+      <div class="prog-bar-wrap"><div class="prog-bar${p===100?' done':''}" style="width:${p}%"></div></div>
+      <div class="prog-meta">${rd} / ${tot} domande</div>
     </div>`;
   });
 
-  html += `<div class="section-label">Piano di studio — 7 giorni</div>`;
+  // Quiz history mini
+  const hist=getHistory();
+  if(hist.length>0){
+    const last=hist[0];
+    const lp=Math.round(last.correct/last.total*100);
+    h+=`<div class="section-label">Ultimo quiz</div>
+    <div class="prog-card" style="cursor:pointer" onclick="goTo('quiz',document.querySelectorAll('.nav-btn')[3])">
+      <div class="prog-top"><span class="prog-name">📝 ${last.date}</span><span class="prog-pct">${lp}%</span></div>
+      <div class="prog-bar-wrap"><div class="prog-bar${lp>=80?' done':''}" style="width:${lp}%"></div></div>
+      <div class="prog-meta">${last.correct} corrette su ${last.total} — tocca per vedere lo storico</div>
+    </div>`;
+  }
+
+  h+=`<div class="section-label">Piano di studio — 7 giorni</div>`;
   PLAN_DAYS.forEach(d=>{
-    const done = isDayDone(d.n);
-    html+=`
-    <div class="day-card" onclick="toggleDay(${d.n})">
-      <div class="day-pill ${done?'done':''}">G${d.n}</div>
+    const done=dayDone(d.n);
+    h+=`<div class="day-card" onclick="toggleDay(${d.n})">
+      <div class="day-pill${done?' done':''}">G${d.n}</div>
       <div class="day-info">
         <div class="day-n">Giorno ${d.n}</div>
         <div class="day-topics">${d.topics}</div>
         <div class="day-method">${d.method}</div>
       </div>
-      <span class="day-check">${done?'✅':'⬜'}</span>
+      <span style="font-size:20px">${done?'✅':'⬜'}</span>
     </div>`;
   });
 
-  html += `
-    <div class="section-label">Consigli</div>
-    <div class="tips-box">
-      <div class="tip-row"><span class="tip-icon">⏰</span><span class="tip-text">Sessioni da 30-40 min la sera — sfrutta il tuo ritmo notturno</span></div>
-      <div class="tip-row"><span class="tip-icon">✍️</span><span class="tip-text">Dopo ogni sezione chiudi l'app e scrivi ciò che ricordi</span></div>
-      <div class="tip-row"><span class="tip-icon">🔄</span><span class="tip-text">Ogni giorno ripassa il 20% del giorno precedente (spaced repetition)</span></div>
-      <div class="tip-row"><span class="tip-icon">🎯</span><span class="tip-text">Attenzione alle domande con risposte simili — sono le più insidiose</span></div>
-    </div>
+  h+=`<div class="section-label">Consigli</div>
+  <div class="tips-box">
+    <div class="tip-row"><span>⏰</span><span class="tip-text">Sessioni da 30-40 min la sera — sfrutta il tuo ritmo notturno</span></div>
+    <div class="tip-row"><span>✍️</span><span class="tip-text">Dopo ogni sezione chiudi l'app e scrivi ciò che ricordi</span></div>
+    <div class="tip-row"><span>🔄</span><span class="tip-text">Ogni giorno ripassa il 20% del giorno precedente</span></div>
+    <div class="tip-row"><span>🎯</span><span class="tip-text">Attenzione alle domande con risposte simili — le più insidiose</span></div>
   </div>`;
 
-  document.getElementById('screen-home').innerHTML = html;
+  document.getElementById('screen-home').innerHTML=h;
 }
 
-// ========================
+// ============================
 // SEZIONI
-// ========================
-function renderSections(filter) {
-  const q = filter.toLowerCase();
-  const items = SECTIONS.filter(s=>s.name.toLowerCase().includes(q)||s.cat.toLowerCase().includes(q));
-  let html = `
+// ============================
+function renderSezioni(filter) {
+  const q=filter.toLowerCase();
+  const items=SECTIONS.filter(s=>s.name.toLowerCase().includes(q)||s.cat.toLowerCase().includes(q));
+  let h=`
   <div class="page-header">
-    <div class="page-title">Sezioni</div>
-    <div class="page-sub">${SECTIONS.length} sezioni, ${getTotalQA()} domande totali</div>
+    <div class="page-header-row">
+      <div><div class="page-title">Sezioni</div><div class="page-sub">${SECTIONS.length} sezioni · ${totalQA()} domande</div></div>
+    </div>
   </div>
   <div class="search-wrap">
-    <input class="search-input" type="search" placeholder="Cerca sezione..." value="${filter}" oninput="renderSections(this.value)" />
+    <input class="search-input" type="search" placeholder="Cerca sezione..." value="${filter}" oninput="renderSezioni(this.value)" />
   </div>
   <div class="sections-list">`;
   items.forEach(s=>{
-    const pct = getSectionPct(s.id);
-    html+=`
-    <div class="sec-item" onclick="goToDetail(${s.id})">
+    const p=secPct(s.id);
+    h+=`<div class="sec-item" onclick="goDetail(${s.id})">
       <div class="sec-icon-wrap">${s.icon}</div>
       <div class="sec-info">
         <div class="sec-name">${s.name}</div>
         <div class="sec-progress">
-          <div class="sec-bar"><div class="sec-bar-fill" style="width:${pct}%"></div></div>
-          <span class="sec-pct">${pct}%</span>
+          <div class="sec-bar"><div class="sec-bar-fill" style="width:${p}%"></div></div>
+          <span class="sec-pct">${p}%</span>
+          <span class="sec-count">${s.qa.length}D</span>
         </div>
       </div>
-      <span class="sec-arrow">›</span>
+      <span style="color:var(--text3);font-size:20px">›</span>
     </div>`;
   });
-  html += '</div>';
-  document.getElementById('screen-sezioni').innerHTML = html;
+  h+='</div>';
+  document.getElementById('screen-sezioni').innerHTML=h;
 }
 
-// ========================
+// ============================
 // DETAIL
-// ========================
-function renderDetail(secId) {
-  const sec = SECTIONS.find(s=>s.id===secId);
-  const pct = getSectionPct(secId);
-  let html = `
+// ============================
+function renderDetail(sid) {
+  const sec=SECTIONS.find(s=>s.id===sid);
+  const p=secPct(sid);
+  let h=`
   <div class="detail-header">
-    <button class="back-btn" onclick="backToSezioni()">‹ Tutte le sezioni</button>
-    <div class="detail-title-row">
-      <span class="detail-icon">${sec.icon}</span>
-      <span class="detail-title">${sec.name}</span>
-    </div>
-    <div class="detail-meta">${sec.qa.length} domande · ${pct}% completato</div>
+    <button class="back-btn" onclick="backSezioni()">‹ Tutte le sezioni</button>
+    <div class="detail-title-row"><span style="font-size:20px">${sec.icon}</span><span class="detail-title">${sec.name}</span></div>
+    <div class="detail-meta" id="detail_meta">${sec.qa.length} domande · ${p}% completato</div>
   </div>
   <div class="qa-list">`;
-
   sec.qa.forEach((qa,i)=>{
-    const read = isQARead(secId, i);
-    html+=`
-    <div class="qa-card ${read?'read':''}" id="qa-${secId}-${i}">
+    const read=isRead(sid,i);
+    h+=`<div class="qa-card${read?' read':''}" id="qcard_${sid}_${i}">
       <div class="qa-num">D${i+1}</div>
       <div class="qa-q">${qa.q}</div>
-      <div class="qa-ans-wrap">
-        <span class="qa-check">✅</span>
-        <span class="qa-ans-text">${qa.a}</span>
-      </div>
+      <div class="qa-ans-wrap"><span class="qa-check">✅</span><span class="qa-ans-text">${qa.a}</span></div>
       <div class="qa-exp">${qa.e}</div>
-      <button class="mark-read-btn ${read?'done':''}" onclick="toggleRead(${secId},${i})">
-        ${read?'✓ Studiata':'Segna come studiata'}
+      <button class="mark-read-btn${read?' done':''}" id="rbtn_${sid}_${i}" onclick="toggleRead(${sid},${i})">
+        ${read?'✓ Studiata':'○ Segna come studiata'}
       </button>
     </div>`;
   });
-  html+='</div>';
-  document.getElementById('screen-detail').innerHTML = html;
+  h+='</div>';
+  document.getElementById('screen-detail').innerHTML=h;
 }
 
-function toggleRead(secId, qaIdx) {
-  const cur = isQARead(secId, qaIdx);
-  markQA(secId, qaIdx, !cur);
-  const card = document.getElementById(`qa-${secId}-${qaIdx}`);
-  if(card){
-    card.className = `qa-card ${!cur?'read':''}`;
-    const btn = card.querySelector('.mark-read-btn');
-    if(btn){ btn.className=`mark-read-btn ${!cur?'done':''}`; btn.textContent=!cur?'✓ Studiata':'Segna come studiata'; }
-  }
-  const header = document.querySelector('.detail-meta');
-  const sec = SECTIONS.find(s=>s.id===secId);
-  if(header && sec) header.textContent=`${sec.qa.length} domande · ${getSectionPct(secId)}% completato`;
-}
-
-// ========================
+// ============================
 // FLASHCARD
-// ========================
-let flashCards=[], flashIdx=0, flashRevealed=false, flashGood=0, flashBad=0, activeFlashFilter='all';
-
-function initFlash() {
-  let pool = SECTIONS.flatMap(s=>s.qa.map(q=>({...q,cat:s.cat,sec:s.name})));
-  if(activeFlashFilter!=='all') pool=pool.filter(q=>q.cat===activeFlashFilter);
-  flashCards = pool.sort(()=>Math.random()-.5);
-  flashIdx=0; flashGood=0; flashBad=0; flashRevealed=false;
+// ============================
+let fCards=[],fIdx=0,fRevealed=false,fGood=0,fBad=0,fFilter='all';
+function initFlash(){
+  let pool=SECTIONS.flatMap(s=>s.qa.map(q=>({...q,cat:s.cat,sec:s.name})));
+  if(fFilter!=='all') pool=pool.filter(q=>q.cat===fFilter);
+  fCards=pool.sort(()=>Math.random()-.5);
+  fIdx=0;fGood=0;fBad=0;fRevealed=false;
   renderFlash();
 }
-
-function setFlashFilter(f,el) {
-  activeFlashFilter=f;
+function setFFilter(f,el){
+  fFilter=f;
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
   initFlash();
 }
-
-function renderFlash() {
-  const total = flashCards.length;
-  if(!total){ document.getElementById('screen-flash').innerHTML='<div style="padding:40px 16px;text-align:center;color:var(--text2);">Nessuna flashcard disponibile.</div>'; return; }
-  if(flashIdx>=total){ renderFlashSummary(); return; }
-  const card = flashCards[flashIdx];
-  const pct = Math.round((flashIdx/total)*100);
-
-  document.getElementById('screen-flash').innerHTML = `
-  <div class="page-header"><div class="page-title">Flashcard</div><div class="page-sub">Tocca la scheda per vedere la risposta</div></div>
+function renderFlash(){
+  const total=fCards.length;
+  if(!total){document.getElementById('screen-flash').innerHTML='<div style="padding:40px 16px;text-align:center;color:var(--text3)">Nessuna flashcard.</div>';return;}
+  if(fIdx>=total){renderFlashSummary();return;}
+  const card=fCards[fIdx];
+  const pct=Math.round(fIdx/total*100);
+  const cats=['all','organizzazione','didattica','fisiologia','padel','regole'];
+  const catL={all:'Tutte',organizzazione:'Organizzazione',didattica:'Didattica',fisiologia:'Fisiologia',padel:'Padel',regole:'Regole'};
+  const chips=cats.map(c=>`<div class="chip${fFilter===c?' active':''}" onclick="setFFilter('${c}',this)">${catL[c]}</div>`).join('');
+  document.getElementById('screen-flash').innerHTML=`
+  <div class="page-header"><div class="page-header-row"><div><div class="page-title">Flashcard</div><div class="page-sub">Tocca per vedere la risposta</div></div></div></div>
   <div class="flash-wrap">
-    <div class="flash-filter">
-      <div class="chip ${activeFlashFilter==='all'?'active':''}" onclick="setFlashFilter('all',this)">Tutte</div>
-      <div class="chip ${activeFlashFilter==='organizzazione'?'active':''}" onclick="setFlashFilter('organizzazione',this)">Organizzazione</div>
-      <div class="chip ${activeFlashFilter==='didattica'?'active':''}" onclick="setFlashFilter('didattica',this)">Didattica</div>
-      <div class="chip ${activeFlashFilter==='fisiologia'?'active':''}" onclick="setFlashFilter('fisiologia',this)">Fisiologia</div>
-      <div class="chip ${activeFlashFilter==='padel'?'active':''}" onclick="setFlashFilter('padel',this)">Padel</div>
-      <div class="chip ${activeFlashFilter==='regole'?'active':''}" onclick="setFlashFilter('regole',this)">Regole</div>
-    </div>
-    <div class="flash-prog-row">
-      <span class="flash-counter">${flashIdx+1} / ${total}</span>
-      <span class="flash-score">✅ ${flashGood} &nbsp; ❌ ${flashBad}</span>
-    </div>
+    <div class="flash-filter">${chips}</div>
+    <div class="flash-prog-row"><span class="flash-counter">${fIdx+1} / ${total}</span><span class="flash-score">✅ ${fGood} &nbsp; ❌ ${fBad}</span></div>
     <div class="flash-prog-bar"><div class="flash-prog-fill" style="width:${pct}%"></div></div>
-    <div class="flash-card ${flashRevealed?'flipped':''}" id="flash-card" onclick="revealFlash()">
+    <div class="flash-card${fRevealed?' flipped':''}" onclick="revealFlash()">
       <div>
         <div class="flash-section-tag">${card.sec}</div>
         <div class="flash-question">${card.q}</div>
-        ${!flashRevealed?`<div class="flash-tap-hint">👆 Tocca per vedere la risposta</div>`:''}
+        ${!fRevealed?'<div class="flash-tap-hint">👆 Tocca per vedere la risposta</div>':''}
       </div>
-      <div class="flash-answer-wrap ${flashRevealed?'show':''}">
-        <div class="flash-answer">✅ ${card.a}</div>
-        <div class="flash-explain">${card.e}</div>
-      </div>
+      ${fRevealed?`<div class="flash-divider"></div><div><div class="flash-answer">✅ ${card.a}</div><div class="flash-explain">${card.e}</div></div>`:''}
     </div>
-    ${flashRevealed
-      ? `<div class="flash-btns">
-          <button class="flash-btn fbtn-bad" onclick="nextFlash(false)">❌ Da ripassare</button>
-          <button class="flash-btn fbtn-good" onclick="nextFlash(true)">✅ Sapevo</button>
-        </div>`
-      : `<button class="flash-reveal-btn" onclick="revealFlash()">👁 Mostra risposta</button>`
+    ${fRevealed
+      ?`<div class="flash-btns"><button class="flash-btn fbtn-bad" onclick="nextFlash(false)">❌ Da ripassare</button><button class="flash-btn fbtn-good" onclick="nextFlash(true)">✅ Sapevo</button></div>`
+      :`<button class="flash-reveal-btn" onclick="revealFlash()">👁 Mostra risposta</button>`
     }
   </div>`;
 }
-
-function revealFlash() {
-  if(flashRevealed) return;
-  flashRevealed=true;
-  renderFlash();
-}
-function nextFlash(knew) {
-  if(knew) flashGood++; else flashBad++;
-  flashIdx++; flashRevealed=false;
-  renderFlash();
-}
-function renderFlashSummary() {
-  const total=flashGood+flashBad;
-  const pct=total>0?Math.round((flashGood/total)*100):0;
+function revealFlash(){if(fRevealed)return;fRevealed=true;renderFlash();}
+function nextFlash(knew){if(knew)fGood++;else fBad++;fIdx++;fRevealed=false;renderFlash();}
+function renderFlashSummary(){
+  const tot=fGood+fBad,p=tot>0?Math.round(fGood/tot*100):0;
   document.getElementById('screen-flash').innerHTML=`
-  <div class="page-header"><div class="page-title">Flashcard</div></div>
-  <div class="flash-wrap">
-    <div class="session-summary" style="display:block">
-      <div class="summary-icon">${pct>=80?'🏆':pct>=60?'💪':'📚'}</div>
-      <div class="summary-title">${pct>=80?'Ottimo lavoro!':pct>=60?'Buon risultato!':'Continua così!'}</div>
-      <div class="summary-sub">${pct}% di risposte corrette in questa sessione</div>
-      <div class="summary-stats">
-        <div class="summary-stat"><div class="summary-stat-val" style="color:var(--green)">${flashGood}</div><div class="summary-stat-lbl">Sapevo</div></div>
-        <div class="summary-stat"><div class="summary-stat-val" style="color:var(--red)">${flashBad}</div><div class="summary-stat-lbl">Da ripassare</div></div>
-        <div class="summary-stat"><div class="summary-stat-val" style="color:var(--accent2)">${total}</div><div class="summary-stat-lbl">Totale</div></div>
+  <div class="page-header"><div class="page-header-row"><div><div class="page-title">Flashcard</div></div></div></div>
+  <div style="padding:16px">
+  <div class="summary-card">
+    <div class="summary-icon">${p>=80?'🏆':p>=60?'💪':'📚'}</div>
+    <div class="summary-title">${p>=80?'Ottimo lavoro!':p>=60?'Buon risultato!':'Continua così!'}</div>
+    <div class="summary-sub">${p}% di risposte corrette in questa sessione</div>
+    <div class="summary-stats">
+      <div class="summary-stat"><div class="summary-stat-val" style="color:var(--green)">${fGood}</div><div class="summary-stat-lbl">Sapevo</div></div>
+      <div class="summary-stat"><div class="summary-stat-val" style="color:var(--red)">${fBad}</div><div class="summary-stat-lbl">Da ripassare</div></div>
+    </div>
+    <button class="btn-primary" onclick="initFlash()">Ricomincia 🔁</button>
+  </div></div>`;
+}
+
+// ============================
+// QUIZ
+// ============================
+let quizQs=[], quizIdx=0, quizAnswered=false, quizCorrect=0, quizWrong=[], quizFilter='all', quizShowHistory=false;
+
+function renderQuizStart(){
+  const hist=getHistory();
+  const cats=['all','organizzazione','didattica','fisiologia','padel','regole'];
+  const catL={all:'Tutte le categorie',organizzazione:'Organizzazione',didattica:'Didattica',fisiologia:'Fisiologia',padel:'Padel',regole:'Regole'};
+  const catBtns=cats.map(c=>`<button class="quiz-cat-btn${quizFilter===c?' active':''}" onclick="setQuizCat('${c}',this)">${catL[c]}</button>`).join('');
+
+  let h=`
+  <div class="page-header">
+    <div class="page-header-row">
+      <div><div class="page-title">Quiz</div><div class="page-sub">20 domande · risposte multiple</div></div>
+    </div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-start-card">
+      <div class="quiz-start-title">Mettiti alla prova</div>
+      <div class="quiz-start-sub">Seleziona una categoria e rispondi a 20 domande. Vedrai le spiegazioni per ogni errore.</div>
+      <div class="quiz-cat-grid">${catBtns}</div>
+      <button class="start-quiz-btn" onclick="startQuiz()">🧠 Inizia il Quiz</button>
+    </div>`;
+
+  if(hist.length>0){
+    h+=`<div class="section-label" style="margin-top:8px">Storico risultati (${hist.length})</div>`;
+    hist.forEach((r,i)=>{
+      const p=Math.round(r.correct/r.total*100);
+      const cls=p>=80?'good':p>=60?'mid':'bad';
+      const lbl=p>=80?'Ottimo':p>=60?'Buono':'Da ripassare';
+      h+=`<div class="history-card" onclick="showHistoryDetail(${i})">
+        <div class="history-top">
+          <span class="history-score ${cls}">${r.correct}/${r.total}</span>
+          <span class="history-badge ${cls}">${lbl} · ${p}%</span>
+        </div>
+        <div class="history-meta">${r.date} · ${r.cat==='all'?'Tutte le categorie':r.cat} · ${r.wrong.length} errori</div>
+        <div class="history-prog-bar"><div class="history-prog-fill" style="width:${p}%;background:${cls==='good'?'var(--green)':cls==='mid'?'var(--amber)':'var(--red)'}"></div></div>
+      </div>`;
+    });
+  }else{
+    h+=`<div class="no-history">Nessun quiz completato ancora.<br>Inizia il tuo primo quiz! 🎯</div>`;
+  }
+  h+='</div>';
+  document.getElementById('screen-quiz').innerHTML=h;
+  document.getElementById('screen-quiz').scrollTop=0;
+}
+
+function setQuizCat(f,el){
+  quizFilter=f;
+  document.querySelectorAll('.quiz-cat-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function startQuiz(){
+  let pool=SECTIONS.flatMap(s=>s.qa.map(q=>({...q,cat:s.cat,sec:s.name})));
+  if(quizFilter!=='all') pool=pool.filter(q=>q.cat===quizFilter);
+  pool=pool.sort(()=>Math.random()-.5);
+  quizQs=pool.slice(0,Math.min(20,pool.length));
+  quizIdx=0;quizCorrect=0;quizWrong=[];quizAnswered=false;
+  renderQuizQ();
+}
+
+function renderQuizQ(){
+  if(quizIdx>=quizQs.length){renderQuizResult();return;}
+  const q=quizQs[quizIdx];
+  const pct=Math.round(quizIdx/quizQs.length*100);
+
+  // Build shuffled options
+  const opts=[q.a,...(q.wrong||[]).slice(0,3)].sort(()=>Math.random()-.5);
+  const optBtns=opts.map((o,i)=>`<button class="quiz-option" id="qopt_${i}" onclick="answerQuiz('${escQ(o)}','${escQ(q.a)}')">${o}</button>`).join('');
+
+  document.getElementById('screen-quiz').innerHTML=`
+  <div class="page-header">
+    <div class="page-header-row">
+      <div><div class="page-title">Quiz</div></div>
+      <button class="theme-toggle" onclick="renderQuizStart()" style="font-size:13px;width:auto;padding:0 12px;border-radius:20px">✕ Esci</button>
+    </div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-header-card">
+      <div class="quiz-header-top">
+        <span class="quiz-q-num">Domanda ${quizIdx+1} di ${quizQs.length}</span>
+        <span class="quiz-score-badge">✅ ${quizCorrect} · ❌ ${quizIdx-quizCorrect}</span>
       </div>
-      <button class="btn-primary" onclick="initFlash()">Ricomincia 🔁</button>
+      <div class="quiz-prog-bar-wrap"><div class="quiz-prog-bar" style="width:${pct}%"></div></div>
+      <div class="quiz-question">${q.q}</div>
+      <div class="quiz-section-tag">${q.sec}</div>
+    </div>
+    <div class="quiz-options">${optBtns}</div>
+    <div class="quiz-exp-box" id="quiz-exp">
+      <div class="quiz-exp-title">💡 Spiegazione</div>
+      <span id="quiz-exp-text"></span>
+    </div>
+    <button class="quiz-next-btn" id="quiz-next" onclick="nextQuizQ()">
+      ${quizIdx+1<quizQs.length?'Prossima domanda →':'Vedi risultato 🏁'}
+    </button>
+  </div>`;
+  quizAnswered=false;
+}
+
+function escQ(s){ return (s||'').replace(/'/g,"\\'"); }
+
+function answerQuiz(chosen, correct){
+  if(quizAnswered) return;
+  quizAnswered=true;
+  const q=quizQs[quizIdx];
+  const isCorrect = chosen===correct;
+  if(isCorrect) quizCorrect++;
+  else quizWrong.push({q:q.q,chosen,correct,e:q.e,sec:q.sec});
+
+  // Style all buttons
+  document.querySelectorAll('.quiz-option').forEach(btn=>{
+    btn.disabled=true;
+    const t=btn.textContent.trim();
+    if(t===correct) btn.classList.add('correct');
+    else if(t===chosen && !isCorrect) btn.classList.add('wrong');
+    else btn.style.opacity='0.4';
+  });
+
+  // Show explanation if wrong
+  if(!isCorrect){
+    const exp=document.getElementById('quiz-exp');
+    const et=document.getElementById('quiz-exp-text');
+    if(exp&&et){exp.classList.add('show');et.textContent=q.e;}
+  }
+  const nb=document.getElementById('quiz-next');
+  if(nb) nb.classList.add('show');
+}
+
+function nextQuizQ(){ quizIdx++; quizAnswered=false; renderQuizQ(); }
+
+function renderQuizResult(){
+  const p=Math.round(quizCorrect/quizQs.length*100);
+  const now=new Date();
+  const date=now.toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric'})+' '+now.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+  saveQuizResult({correct:quizCorrect,total:quizQs.length,date,cat:quizFilter,wrong:quizWrong});
+
+  let h=`
+  <div class="page-header"><div class="page-header-row"><div><div class="page-title">Risultato Quiz</div></div></div></div>
+  <div style="padding:14px 16px">
+  <div class="summary-card">
+    <div class="summary-icon">${p>=80?'🏆':p>=60?'💪':'📚'}</div>
+    <div class="summary-title">${p>=80?'Ottimo!':p>=60?'Buon lavoro!':'Hai bisogno di ripassare'}</div>
+    <div class="summary-sub">${p}% di risposte corrette</div>
+    <div class="summary-stats">
+      <div class="summary-stat"><div class="summary-stat-val" style="color:var(--green)">${quizCorrect}</div><div class="summary-stat-lbl">Corrette</div></div>
+      <div class="summary-stat"><div class="summary-stat-val" style="color:var(--red)">${quizQs.length-quizCorrect}</div><div class="summary-stat-lbl">Sbagliate</div></div>
+      <div class="summary-stat"><div class="summary-stat-val" style="color:var(--accent2)">${quizQs.length}</div><div class="summary-stat-lbl">Totale</div></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+      <button class="btn-primary" onclick="startQuiz()">🔁 Nuovo Quiz</button>
+      <button class="btn-primary" style="background:var(--bg3);color:var(--text2);border:0.5px solid var(--border2)" onclick="renderQuizStart()">📋 Storico</button>
     </div>
   </div>`;
+
+  if(quizWrong.length>0){
+    h+=`<div class="section-label" style="margin-top:8px">❌ Risposte sbagliate (${quizWrong.length})</div>`;
+    quizWrong.forEach((w,i)=>{
+      h+=`<div class="result-detail-card">
+        <div class="result-q-header"><span class="result-icon">❌</span><span class="result-q-text">${w.q}</span></div>
+        <div class="result-ans wrong" style="padding:0 14px 6px">Tua risposta: ${w.chosen}</div>
+        <div class="result-ans correct" style="padding:0 14px 8px">✅ Risposta corretta: ${w.correct}</div>
+        <div class="result-exp">${w.e}</div>
+      </div>`;
+    });
+  } else {
+    h+=`<div style="padding:20px;text-align:center;color:var(--green);font-size:15px;font-weight:500">🎉 Nessun errore! Perfetto!</div>`;
+  }
+
+  h+='</div>';
+  document.getElementById('screen-quiz').innerHTML=h;
+  document.getElementById('screen-quiz').scrollTop=0;
 }
 
-// ========================
+function showHistoryDetail(idx){
+  const hist=getHistory();
+  const r=hist[idx];
+  const p=Math.round(r.correct/r.total*100);
+  let h=`
+  <div class="page-header">
+    <div class="page-header-row">
+      <div><div class="page-title">Dettaglio Quiz</div><div class="page-sub">${r.date}</div></div>
+      <button class="theme-toggle" onclick="renderQuizStart()" style="font-size:13px;width:auto;padding:0 12px;border-radius:20px">‹ Indietro</button>
+    </div>
+  </div>
+  <div style="padding:14px 16px">
+  <div class="summary-card" style="margin:0 0 14px">
+    <div class="summary-icon">${p>=80?'🏆':p>=60?'💪':'📚'}</div>
+    <div class="summary-title">${p}% · ${r.correct}/${r.total} corrette</div>
+    <div class="summary-sub">${r.cat==='all'?'Tutte le categorie':r.cat} · ${r.wrong.length} errori</div>
+  </div>`;
+  if(r.wrong&&r.wrong.length>0){
+    h+=`<div class="section-label">Errori commessi</div>`;
+    r.wrong.forEach(w=>{
+      h+=`<div class="result-detail-card">
+        <div class="result-q-header"><span class="result-icon">❌</span><span class="result-q-text">${w.q}</span></div>
+        <div class="result-ans wrong" style="padding:0 14px 6px">Risposta data: ${w.chosen}</div>
+        <div class="result-ans correct" style="padding:0 14px 8px">✅ Corretta: ${w.correct}</div>
+        <div class="result-exp">${w.e}</div>
+      </div>`;
+    });
+  } else {
+    h+=`<div style="padding:20px;text-align:center;color:var(--green);font-size:15px">🎉 Nessun errore in questo quiz!</div>`;
+  }
+  h+='</div>';
+  document.getElementById('screen-quiz').innerHTML=h;
+  document.getElementById('screen-quiz').scrollTop=0;
+}
+
+// ============================
 // NUMERI
-// ========================
-function renderNums() {
-  let html = `<div class="page-header"><div class="page-title">Numeri chiave</div><div class="page-sub">Da memorizzare per l'esame</div></div><div class="nums-grid">`;
-  NUMBERS_DATA.forEach(n=>{
-    html+=`<div class="num-card"><div class="num-val">${n.val}</div><div class="num-lbl">${n.lbl}</div><div class="num-ctx">${n.ctx}</div></div>`;
-  });
-  html+='</div>';
-  document.getElementById('screen-numeri').innerHTML=html;
+// ============================
+function renderNumeri(){
+  let h=`<div class="page-header"><div class="page-header-row"><div><div class="page-title">Numeri chiave</div><div class="page-sub">Da memorizzare per l'esame</div></div></div></div><div class="nums-grid">`;
+  NUMBERS_DATA.forEach(n=>{h+=`<div class="num-card"><div class="num-val">${n.val}</div><div class="num-lbl">${n.lbl}</div><div class="num-ctx">${n.ctx}</div></div>`;});
+  h+='</div>';
+  document.getElementById('screen-numeri').innerHTML=h;
 }
 
-// ========================
+// ============================
 // INIT
-// ========================
-loadProgress();
+// ============================
+load();
+applyTheme();
 renderHome();
-renderNums();
+renderNumeri();
 </script>
 </body>
 </html>
