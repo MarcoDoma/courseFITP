@@ -263,6 +263,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 .num-val{font-size:24px;font-weight:600;color:var(--accent2);font-family:'DM Mono',monospace;margin-bottom:4px}
 .num-lbl{font-size:13px;font-weight:500;margin-bottom:3px}
 .num-ctx{font-size:11px;color:var(--text3);line-height:1.4}
+
 </style>
 </head>
 <body>
@@ -289,21 +290,21 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 // ============================
 const SECTIONS = [
   {id:1,name:"Attività Didattiche",icon:"📚",cat:"organizzazione",qa:[
-    {q:"Il Maestro Nazionale:",a:"Può lavorare in tutte le fasi didattiche",e:"Il Maestro Nazionale è la qualifica più alta (4° livello). Può operare in qualsiasi fase didattica, dall'avviamento all'alto livello.",wrong:["Non può allenare nell'alto livello","Corrisponde al 3° livello","Non può occuparsi di Padel"]},
-    {q:"La qualifica di Istruttore di 1° Grado/Livello:",a:"È triennale",e:"La qualifica dura 3 anni. Vale per padel, beach tennis ecc. Non si rinnova con il Simposio Internazionale.",wrong:["È biennale","È presente solo nel tennis","Si rinnova con il Simposio Internazionale"]},
+    {q:"Il Maestro Nazionale:",a:"Non può allenare nell'alto livello",e:"Il Maestro Nazionale corrisponde al 3° livello (non al 4°). Può occuparsi di tre delle quattro fasi didattiche, con esclusione dell'alto livello (atleti professionisti con punti ATP/WTA).",wrong:["Può lavorare in tutte le fasi didattiche","Corrisponde al 4° livello","Non può occuparsi di Padel/Beach Tennis/Pickleball"]},
+    {q:"La qualifica di Istruttore di 1° Grado/Livello:",a:"È biennale",e:"La qualifica dura 2 anni. Vale per padel, beach tennis ecc. Non si rinnova con il Simposio Internazionale.",wrong:["È triennale","È presente solo nel tennis","Si rinnova con il Simposio Internazionale"]},
     {q:"Il Corso di Preparatore Fisico di 1° Grado:",a:"È riservato ai laureati in Scienze Motorie",e:"Questo corso ha un requisito formativo specifico. Non è aperto a tutti gli insegnanti.",wrong:["È aperto a tutti gli insegnanti","Abilita a lavorare solo nel tennis","Abilita a lavorare nella fase di avviamento"]},
-    {q:"Il percorso per la qualifica di Istruttore di 1° Grado si articola in:",a:"3 step formativi",e:"Tre step: teoria + pratica + verifica/esame.",wrong:["2 step formativi","4 step formativi","5 step formativi"]},
+    {q:"Il percorso per la qualifica di Istruttore di 1° Grado si articola in:",a:"4 step formativi",e:"Quattro step formativi.",wrong:["2 step formativi","3 step formativi","5 step formativi"]},
     {q:"I C.A.P. e i C.A.T. si occupano di:",a:"Bambini dai 7 ai 10 anni circa",e:"Centri di Avviamento alla Pratica: fascia 7-10 anni. I C.P.A. si occupano degli 11-16/18 anni.",wrong:["Ragazzi dagli 11 ai 16 anni","Sono a Formia e Tirrenia per l'alto livello","Raduni ai centri estivi"]}
   ]},
   {id:2,name:"Scuole Federali",icon:"🏫",cat:"organizzazione",qa:[
     {q:"L'ISF si occupa:",a:"Formazione insegnanti + settore tecnico nazionale Under 18",e:"L'ISF ha doppio ruolo: forma gli insegnanti E gestisce il settore tecnico under 18. Non solo tennis e padel.",wrong:["Esclusivamente della formazione degli insegnanti","Della formazione insegnanti e del settore Under 20","Solo dei corsi di tennis e padel"]},
     {q:"I C.P.A.:",a:"Si occupano dell'attività dagli 11 ai 16-18 anni",e:"Centri di Preparazione Avanzata: fascia pre-agonismo 11-16/18 anni. Non sono a Formia/Tirrenia.",wrong:["Sono a Formia e a Tirrenia","Si occupano dell'attività Under 10","Sono coordinati dai fiduciari dell'ISF"]},
-    {q:"L'Istruttore di 1° Grado può coordinare:",a:"Una Basic School",e:"1° grado = SOLO Basic School. Non Club School né Standard School.",wrong:["Una Club School","Club e Basic School","Una Standard School"]},
+    {q:"L'Istruttore di 1° Grado può coordinare:",a:"Una Club School",e:"1° grado = SOLO Club School. Non Basic School né Standard School.",wrong:["Una Basic School","Club e Basic School","Una Standard School"]},
     {q:"Nel Padel e nel Beach Tennis esistono:",a:"Club, Basic e Standard School (3 tipologie)",e:"3 tipologie per padel/beach. Il tennis ne ha 5 (Club-Basic-Standard-Super-Top).",wrong:["5 tipologie di scuole","4 tipologie di scuole","Non esistono ancora le tipologie di scuole"]},
     {q:"Il FIT Junior Program è un progetto per:",a:"Allievi NON in possesso della tessera agonistica",e:"Per chi inizia senza la pressione della competizione formale. Non per agonisti.",wrong:["Gli allievi che partecipano ai C.A.P.","Gli allievi dei C.P.A.","Aperto ad agonisti"]}
   ]},
   {id:3,name:"Fasi Didattiche",icon:"🎓",cat:"didattica",qa:[
-    {q:"Le fasi didattiche:",a:"Sono legate alle competenze (non all'età)",e:"Un bambino di 8 anni può essere in fase avanzata se ha le competenze. Ci sono 3 fasi.",wrong:["Sono legate all'età cronologica","Sono 5","Sono legate all'anno di nascita"]},
+    {q:"Le fasi didattiche:",a:"Sono legate alle competenze (non all'età)",e:"Un bambino di 8 anni può essere in fase avanzata se ha le competenze. Le 4 fasi sono: Mini/Gioco-Sport, Perfezionamento, Specializzazione, Alto Livello.",wrong:["Sono legate all'età cronologica","Sono 5","Sono legate all'anno di nascita"]},
     {q:"\"Apprendere con consapevolezza\" è lo slogan:",a:"Del Perfezionamento",e:"Mini = Apprendere giocando/divertendosi. Perfezionamento = Apprendere con consapevolezza. Specializzazione = Individualizzazione.",wrong:["Del Mini-Padel/Beach","Della Specializzazione","Di nessuna fase didattica"]},
     {q:"Il Gioco-Sport si caratterizza per:",a:"Attrezzi, Spazi, Regole + Azioni di gioco (4 elementi)",e:"Non bastano 'attrezzi, spazi, regole'. Ci vogliono anche le azioni di gioco.",wrong:["Mentale, Motorio, Tattico, Tecnico","Attrezzi, Spazi, Regole (3 elementi)","Età dell'allievo e livello di gioco"]},
     {q:"Rapporto insegnante/allievo nella Prima Fase Didattica:",a:"1 insegnante, 4 allievi",e:"Prima fase = 1:4. Perfezionamento = 1:2-3. Specializzazione può arrivare a 1:1.",wrong:["1 insegnante, 6 allievi","1 insegnante, 8 allievi","2 insegnanti, 10 allievi"]},
@@ -353,7 +354,7 @@ const SECTIONS = [
   ]},
   {id:11,name:"Organizzazione della Lezione",icon:"📖",cat:"didattica",qa:[
     {q:"Quante parti costituiscono una lezione tipo:",a:"3 parti",e:"Parte iniziale, parte centrale, parte finale. Sempre 3.",wrong:["4 parti","2 parti","5 parti"]},
-    {q:"Gli elementi corretti della parte iniziale:",a:"Accoglienza → Attivazione → Familiarizzazione → Dimostrazione",e:"La sequenza corretta in 4 elementi.",wrong:["Accoglienza → Attivazione → Dimostrazione → Spiegazione","Accoglienza → Propedeutica → Attivazione → Spiegazione","Attivazione → Accoglienza → Dimostrazione → Familiarizzazione"]},
+    {q:"Gli elementi corretti della parte iniziale:",a:"Accoglienza → Attivazione → Familiarizzazione → Dimostrazione",e:"Nella parte iniziale l'insegnante introduce: Accoglienza (punto di riferimento), Attivazione emotiva (riscaldamento ludico), Familiarizzazione palla/racchetta/spazio, Dimostrazione (spiegazione visiva del gesto).",wrong:["Accoglienza → Attivazione → Dimostrazione → Spiegazione","Accoglienza → Propedeutica → Attivazione → Spiegazione","Attivazione → Accoglienza → Dimostrazione → Familiarizzazione"]},
     {q:"Quale parte occupa la maggior percentuale di tempo nella 1ª fase:",a:"La parte centrale",e:"Il cuore della lezione dove si lavora sull'obiettivo principale (60-70%). Inizio e fine sono più brevi.",wrong:["Parte iniziale - attivazione","Parte centrale - situazione chiusa","Parte finale"]},
     {q:"Tipo di esercitazioni consigliate nella parte finale:",a:"Esercitazioni gara",e:"La fine deve ricreare condizioni di gioco reale con competizione. Consolida tutto ciò che si è lavorato.",wrong:["Esercitazioni randomizzate","Esercitazioni variate","Esercitazioni di attivazione"]},
     {q:"Rapporto ottimale nella fase del Perfezionamento:",a:"1 insegnante : 2-3 allievi",e:"Prima fase = 1:4. Perfezionamento = 1:2-3. Specializzazione può essere 1:1.",wrong:["1 insegnante : 1 allievo","1 insegnante : 4 allievi","2 insegnanti : 8 allievi"]}
@@ -368,7 +369,7 @@ const SECTIONS = [
   {id:13,name:"Area Mentale e COMETA",icon:"⭐",cat:"didattica",qa:[
     {q:"L'acronimo COMETA rappresenta:",a:"Un simbolo, un punto di riferimento importante",e:"Le funzioni dell'insegnante come punto di riferimento luminoso per gli allievi.",wrong:["Un nome che ricorda il Natale","Un punto di riferimento da non imitare","Un aspetto da non considerare"]},
     {q:"Per 'Educare' in COMETA si intende:",a:"Sviluppare le potenzialità del bambino attraverso lo sport",e:"Educare = tirare fuori (e-ducere). Lo sport è il veicolo per sviluppare le potenzialità umane.",wrong:["Inibire le potenzialità del bambino","Trascurare le potenzialità del bambino","Negare le potenzialità del bambino"]},
-    {q:"Obiettivo NON del livello Delfino:",a:"Volitività",e:"Il livello Delfino ha: Attenzione, Divertimento, Entusiasmo. La volitività è un obiettivo più avanzato.",wrong:["Attenzione","Divertimento","Entusiasmo"]},
+    {q:"Obiettivo NON del livello Delfino:",a:"Attenzione",e:"Gli obiettivi del livello Delfino sono: Divertimento, Entusiasmo, Emulazione/Collaborazione/Aiuto, Motivazione, Volitività, Autoefficacia e Creatività. L'Attenzione non è tra questi obiettivi.",wrong:["Divertimento","Entusiasmo","Volitività"]},
     {q:"Il bambino a 5-6 anni è:",a:"Desideroso di gratificazioni istantanee",e:"A 5-6 anni vive il 'qui e ora': vuole ricompense immediate, non risultati a lungo termine.",wrong:["Fortemente cooperativo","Sempre attento e concentrato","Sempre pronto a competere"]},
     {q:"La volitività è:",a:"La capacità di darsi obiettivi chiari e definiti",e:"Non è empatia né imagery. È la determinazione trasformata in obiettivi concreti.",wrong:["La capacità di leggere gli stati mentali dell'altro","La capacità di immaginarsi durante la prestazione","La capacità di regolare le proprie emozioni"]},
     {q:"La Psicologia Positiva lavora su:",a:"Punti di forza della persona",e:"Non si focalizza su problemi/debolezze ma su risorse, punti di forza e benessere (Seligman).",wrong:["Punti deboli della persona","All'insaputa della persona","Trascurando la persona"]},
@@ -414,7 +415,7 @@ const SECTIONS = [
     {q:"Nella fase TURGOR si cresce in:",a:"Allungamento (in lunghezza)",e:"Turgor = cresce in altezza. Proceritas = il corpo si stabilizza/allarga. Si alternano in sequenza.",wrong:["Allargamento (in larghezza)","Allungamento e allargamento insieme","Non si cresce in questa fase"]},
     {q:"La 'fase d'oro' dell'apprendimento motorio:",a:"Dagli 8 agli 11 anni",e:"Cervello plastico, corpo proporzionato, alta motivazione. Momento migliore per schemi motori complessi.",wrong:["Dai 5 ai 7 anni","Dai 12 ai 14 anni","Dai 6 ai 9 anni"]},
     {q:"Il bambino è più coordinato nella fase Turgor o Proceritas?",a:"Nella fase Turgor",e:"Nella Turgor il corpo è proporzionato. Nella Proceritas cambia più velocemente e la coordinazione può peggiorare.",wrong:["Nella fase Proceritas","In entrambe le fasi","In nessuna delle due"]},
-    {q:"A quale età corrisponde 'l'età della ragione e periodo d'oro della motricità':",a:"7-11 anni",e:"Pensiero logico-concreto di Piaget + massima educabilità motoria in contemporanea.",wrong:["10-12 anni","8-11 anni (NB: qui la risposta è 7-11)","13-14 anni"]}
+    {q:"A quale età corrisponde 'l'età della ragione e periodo d'oro della motricità':",a:"7-11 anni",e:"Pensiero logico-concreto di Piaget + massima educabilità motoria in contemporanea.",wrong:["10-12 anni","8-11 anni","13-14 anni"]}
   ]},
   {id:21,name:"Sport Vision",icon:"👁️",cat:"fisiologia",qa:[
     {q:"Le informazioni che passano dal canale visivo:",a:"83% — la visione domina su tutti gli altri sensi",e:"Gli altri sensi contribuiscono per il 17%. La visione è il senso dominante nell'uomo.",wrong:["3%","11%","2%"]},
@@ -425,8 +426,8 @@ const SECTIONS = [
     {q:"L'area mentale appartiene al principio di:",a:"Multilateralità",e:"La multilateralità abbraccia tutte le aree: Mentale, Motoria, Tattica, Tecnica.",wrong:["Multiformità","Specificità dell'apprendimento","Multidisciplinarietà"]},
     {q:"Misure del campo da minipadel RED:",a:"4 x 10 metri",e:"Il campo più piccolo per i più piccoli. 4m larghezza, 10m lunghezza.",wrong:["5 x 8 metri","4 x 4 metri","7 x 14 metri"]},
     {q:"Quanti campi RED si possono ricavare da 1 campo padel standard:",a:"4 campi RED",e:"Questa moltiplicazione degli spazi permette a più bambini di praticare contemporaneamente.",wrong:["2 campi","6 campi","8 campi"]},
-    {q:"Passi del quaderno didattico del Mini Padel:",a:"10 passi",e:"Un percorso strutturato in 10 step progressivi.",wrong:["12 passi","8 passi","14 passi"]},
-    {q:"L'argomento del secondo passo nel quaderno del Mini Padel:",a:"Diritto e Rovescio",e:"Il secondo passo introduce i colpi fondamentali dopo la fase iniziale.",wrong:["Servizio e Risposta","Volée Diritto e Rovescio","Parete Diritto e Rovescio"]}
+    {q:"Passi del quaderno didattico del Mini Padel:",a:"12 passi",e:"Il percorso del Diario del Padel Livello RED è composto da 12 passi, ognuno con obiettivi mentali, motori, tattici e tecnici.",wrong:["10 passi","8 passi","14 passi"]},
+    {q:"L'argomento del secondo passo nel quaderno del Mini Padel:",a:"Servizio e Risposta",e:"Primo passo = Diritto e Rovescio senza parete. Secondo passo = Servizio e Risposta. I passi vanno di due in due.",wrong:["Diritto e Rovescio","Volée Diritto e Rovescio","Parete Diritto e Rovescio"]}
   ]},
   {id:23,name:"Area Tattica",icon:"🎯",cat:"padel",qa:[
     {q:"L'elemento fondamentale negli sport di situazione:",a:"Lo spazio-tempo",e:"Tutto dipende dalla gestione dello spazio (dove) e del tempo (quando colpisco, quanto ho per reagire).",wrong:["Esercitazioni a blocchi","Metodo analitico","Tutte le risposte sono errate"]},
@@ -442,23 +443,23 @@ const SECTIONS = [
   ]},
   {id:25,name:"Stili di Insegnamento",icon:"👨‍🏫",cat:"didattica",qa:[
     {q:"Il rischio dello stile prescrittivo:",a:"Creare un colpitore, non un giocatore tatticamente completo",e:"Sviluppa gesti tecnici ma non il pensiero tattico. Bel colpitore che non sa cosa fare in partita.",wrong:["Non c'è rischio, è la metodologia ottimale","Creare un giocatore e non un colpitore","Creare un giocatore improntato solo alla tattica"]},
-    {q:"Nel Game Based Approach la sequenza ottimale è:",a:"Introduzione al gioco → Partita → Fase di intervento",e:"Si inizia con il gioco, si lascia giocare (emergono i problemi), poi si interviene.",wrong:["Fase di intervento → partita","Introduzione al gioco → partita → fase di intervento (corretto!)","Partita → fase di intervento → introduzione al gioco"]},
+    {q:"Nel Game Based Approach la sequenza ottimale è:",a:"Introduzione al gioco → Partita → Fase di intervento",e:"Si inizia con il gioco, si lascia giocare (emergono i problemi), poi si interviene con la tecnica nel contesto di gioco (situazione aperta → chiusa → aperta).",wrong:["Introduzione al gioco → Fase di intervento → Partita","Fase di intervento → Partita → Introduzione al gioco","Partita → fase di intervento → introduzione al gioco"]},
     {q:"L'obiettivo principale dello stile prescrittivo:",a:"Apprendimento del modello tecnico ottimale",e:"Efficace per la tecnica di base ma insufficiente per lo sviluppo completo del giocatore.",wrong:["Apprendimento individualizzato","Giocare molte partite per correggere la tattica","Correzione solo in presenza di eccesso di errore"]}
   ]},
   {id:26,name:"Storia del Padel",icon:"🏆",cat:"padel",qa:[
     {q:"Anno di nascita della Federazione Internazionale di Padel (FIP):",a:"1991",e:"La FIP nasce nel 1991. Il padel come sport nasce prima (anni '60-'70 in Messico).",wrong:["1981","2001","2011"]},
-    {q:"Migliore piazzamento della nazionale maschile italiana ai mondiali:",a:"Terzo posto",e:"Eccellente risultato considerando la competitività di Argentina e Spagna.",wrong:["Quarto posto","Secondo posto","Primo posto"]},
+    {q:"Migliore piazzamento della nazionale maschile italiana ai mondiali:",a:"Quarto posto",e:"La nazionale maschile italiana ha ottenuto il 4° posto ai Mondiali di Doha 2024, il miglior risultato iridato. Le donne hanno invece ottenuto il 3° posto.",wrong:["Terzo posto","Secondo posto","Primo posto"]},
     {q:"Cosa avvenne nel 2022:",a:"La FIT cambia nome in Federazione Italiana Tennis e Padel (F.I.T.P.)",e:"Svolta storica: riconoscimento ufficiale del padel nella federazione italiana.",wrong:["L'Italia vince il mondiale di padel","Non avviene nulla di significativo","Il CONI riconosce il Settore padel"]},
-    {q:"Perché il 2019 è un anno storico per il padel italiano:",a:"L'Italia si aggiudica la prima medaglia europea",e:"Prima medaglia agli Europei di Padel — pietra miliare del padel italiano.",wrong:["L'Italia vince l'Europeo per la prima volta","L'Italia si aggiudica la prima medaglia mondiale","La Federazione italiana cambia nome"]}
+    {q:"Perché il 2019 è un anno storico per il padel italiano:",a:"L'Italia vince l'Europeo per la prima volta",e:"Nel 2019 a Roma la nazionale maschile italiana vince il Campionato Europeo di Padel battendo la Francia. Primo titolo europeo nella storia del padel italiano.",wrong:["L'Italia si aggiudica la prima medaglia europea","L'Italia si aggiudica la prima medaglia mondiale","La Federazione italiana cambia nome"]}
   ]},
   {id:27,name:"Regole di Padel",icon:"📜",cat:"regole",qa:[
     {q:"Tempo entro cui un giocatore assente viene dichiarato tale:",a:"15 minuti dalla chiamata",e:"Il regolamento FITP prevede 15 minuti di attesa dalla chiamata.",wrong:["5 minuti","10 minuti","20 minuti"]},
     {q:"Dopo sospensione di 18 min per pioggia, minuti di palleggio accordati:",a:"3 minuti",e:"Per sospensioni 10-30 min circa = 3 minuti di palleggio preliminare.",wrong:["Nessun palleggio è concesso","5 minuti","2 minuti"]},
-    {q:"Con 3 violazioni del codice di condotta si va incontro a:",a:"Avvertimento con perdita del GIOCO",e:"1° = avvertimento. 2° = perdita del punto. 3° = perdita del gioco. Oltre = squalifica.",wrong:["Avvertimento con sanzione pecuniaria","Avvertimento con perdita del punto","Avvertimento con squalifica"]},
+    {q:"Con 3 violazioni del codice di condotta si va incontro a:",a:"Avvertimento con squalifica",e:"1ª infrazione = avvertimento. 2ª infrazione = avvertimento con perdita del punto. 3ª infrazione = avvertimento con SQUALIFICA (non con perdita del gioco).",wrong:["Avvertimento con sanzione pecuniaria","Avvertimento con perdita del punto","Avvertimento con perdita del gioco"]},
     {q:"Dimensioni zona di sicurezza per gioco all'esterno:",a:"2m larghezza, 4m lunghezza, 3m altezza",e:"Questa combinazione garantisce la sicurezza di giocatori e spettatori.",wrong:["3m larghezza, 4m lunghezza, 2m altezza","4m larghezza, 3m lunghezza, 2m altezza","2m larghezza, 3m lunghezza, 4m altezza"]}
   ]},
   {id:28,name:"Regolamenti e Tornei",icon:"📋",cat:"regole",qa:[
-    {q:"Un giocatore senza tessera può giocare?",a:"Sì, con dichiarazione liberatoria e tassa sub-judice",e:"Deve firmare e pagare una tassa condizionata alla verifica della tessera.",wrong:["No, assolutamente","Sì, con il solo pagamento della tassa","Sì, con dichiarazione liberatoria e pagamento a fondo perduto"]},
+    {q:"Un giocatore senza tessera può giocare?",a:"Sì, con dichiarazione liberatoria e pagamento a fondo perduto",e:"Il giocatore sottoscrive una dichiarazione liberatoria dichiarando di avere una tessera atleta valida. Il pagamento della tassa è a fondo perduto (non rimborsabile).",wrong:["No, assolutamente","Sì, con il solo pagamento della tassa","Sì, con dichiarazione liberatoria e tassa sub-judice"]},
     {q:"Un incontro può essere interrotto dai giocatori d'accordo per pioggia?",a:"No — decide il direttore di gara",e:"I giocatori non possono decidere autonomamente di interrompere la partita.",wrong:["Sì, se sono d'accordo","Decide il giocatore che serve","Decide il giocatore che risponde"]},
     {q:"Un under 10 a che tipologie di tornei può partecipare:",a:"Under e quarta categoria",e:"Non a tutte le categorie. Solo la propria categoria (under) e la quarta.",wrong:["Solo under 10","Solo under (qualsiasi)","Qualunque tipologia"]},
     {q:"Sospensioni per il bagno previste:",a:"1 per gli uomini, 2 per le donne",e:"Trattamento differenziato per esigenze fisiologiche diverse.",wrong:["Quante volte sono necessarie","Due per gli uomini e due per le donne","Una ogni set"]}
@@ -477,8 +478,8 @@ const SECTIONS = [
 ];
 
 const NUMBERS_DATA = [
-  {val:"3",lbl:"Step formativi",ctx:"Percorso Istruttore 1° grado"},
-  {val:"3",lbl:"Fasi didattiche",ctx:"Legate alle competenze, non all'età"},
+  {val:"4",lbl:"Step formativi",ctx:"Percorso Istruttore 1° grado"},
+  {val:"4",lbl:"Fasi didattiche",ctx:"Mini, Perfezionamento, Specializzazione, Alto Livello"},
   {val:"4",lbl:"Principi didattici",ctx:"Multilateralità, Multiformità, Specificità, Gradualità"},
   {val:"1:4",lbl:"Rapporto 1ª fase",ctx:"1 insegnante per 4 allievi"},
   {val:"1:2/3",lbl:"Rapporto Perfez.",ctx:"1 insegnante per 2-3 allievi"},
@@ -496,7 +497,7 @@ const NUMBERS_DATA = [
   {val:"3",lbl:"Tipologie genitori POZ",ctx:"Poco, moderatamente, eccessivamente coinvolti"},
   {val:"3 m",lbl:"Spostamenti brevi",ctx:"Aggiustamenti piccoli in campo"},
   {val:"6-12 m",lbl:"Medio-lungo raggio",ctx:"Spostamenti ampi con cambio direzione"},
-  {val:"10",lbl:"Passi Mini Padel",ctx:"Quaderno didattico strutturato"},
+  {val:"12",lbl:"Passi Mini Padel",ctx:"Quaderno didattico strutturato (Diario del Padel Livello RED)"},
   {val:"4×10",lbl:"Campo RED (m)",ctx:"4m larghezza × 10m lunghezza"},
   {val:"4",lbl:"Campi RED",ctx:"Da 1 campo padel si ricavano 4 campi RED"},
   {val:"15 min",lbl:"Attesa giocatore assente",ctx:"Poi viene dichiarato assente a tavolino"},
@@ -677,36 +678,88 @@ function renderHome() {
 // ============================
 // SEZIONI
 // ============================
+let _secOpen = new Set();
+let _secCat = 'all';
+
 function renderSezioni(filter) {
-  const q=filter.toLowerCase();
-  const items=SECTIONS.filter(s=>s.name.toLowerCase().includes(q)||s.cat.toLowerCase().includes(q));
+  const cats = ['all','organizzazione','didattica','fisiologia','padel','regole'];
+  const catL = {all:'Tutte',organizzazione:'Org.',didattica:'Didattica',fisiologia:'Fisiologia',padel:'Padel',regole:'Regole'};
+  const q = (filter||'').toLowerCase();
+  const items = SECTIONS.filter(s => {
+    const mc = _secCat==='all' || s.cat===_secCat;
+    const mq = !q || s.name.toLowerCase().includes(q) || s.cat.toLowerCase().includes(q);
+    return mc && mq;
+  });
+  const doneSec = SECTIONS.filter(s=>secPct(s.id)===100).length;
+  const chips = cats.map(c=>`<div class="chip${_secCat===c?' active':''}" onclick="_secCat='${c}';renderSezioni('')">${catL[c]}</div>`).join('');
   let h=`
   <div class="page-header">
     <div class="page-header-row">
-      <div><div class="page-title">Sezioni</div><div class="page-sub">${SECTIONS.length} sezioni · ${totalQA()} domande</div></div>
+      <div><div class="page-title">Sezioni</div><div class="page-sub">${doneSec}/${SECTIONS.length} complete · ${totalRead()}/${totalQA()} domande</div></div>
     </div>
   </div>
-  <div class="search-wrap">
-    <input class="search-input" type="search" placeholder="Cerca sezione..." value="${filter}" oninput="renderSezioni(this.value)" />
-  </div>
+  <div class="search-wrap"><input class="search-input" type="search" placeholder="Cerca sezione..." value="${filter||''}" oninput="renderSezioni(this.value)" /></div>
+  <div style="padding:6px 16px 2px"><div class="flash-filter">${chips}</div></div>
   <div class="sections-list">`;
   items.forEach(s=>{
     const p=secPct(s.id);
-    h+=`<div class="sec-item" onclick="goDetail(${s.id})">
-      <div class="sec-icon-wrap">${s.icon}</div>
-      <div class="sec-info">
-        <div class="sec-name">${s.name}</div>
-        <div class="sec-progress">
-          <div class="sec-bar"><div class="sec-bar-fill" style="width:${p}%"></div></div>
-          <span class="sec-pct">${p}%</span>
-          <span class="sec-count">${s.qa.length}D</span>
+    const isOpen=_secOpen.has(s.id);
+    h+=`<div class="sec-item-wrap" style="margin-bottom:9px">
+      <div class="sec-item" style="margin-bottom:0;border-radius:${isOpen?'14px 14px 0 0':'14px'}" onclick="_secToggle(${s.id})">
+        <div class="sec-icon-wrap">${s.icon}</div>
+        <div class="sec-info">
+          <div class="sec-name">${s.name}</div>
+          <div class="sec-progress">
+            <div class="sec-bar"><div class="sec-bar-fill" id="sbar_${s.id}" style="width:${p}%"></div></div>
+            <span class="sec-pct" id="spct_${s.id}">${p}%</span>
+            <span class="sec-count">${s.qa.length}D</span>
+          </div>
         </div>
+        <span style="color:var(--text3);font-size:20px;transition:transform .2s;display:inline-block;transform:rotate(${isOpen?'90deg':'0deg'})" id="sarr_${s.id}">›</span>
       </div>
-      <span style="color:var(--text3);font-size:20px">›</span>
-    </div>`;
+      <div id="sconc_${s.id}" style="display:${isOpen?'block':'none'};background:var(--bg2);border:0.5px solid var(--border);border-top:none;border-radius:0 0 14px 14px;overflow:hidden">`;
+    if(isOpen){
+      s.qa.forEach((qa,i)=>{
+        const read=isRead(s.id,i);
+        h+=`<div class="qa-card${read?' read':''}" id="qcard_${s.id}_${i}" style="margin:0;border-radius:0;border-left:none;border-right:none;border-top:0.5px solid var(--border);border-bottom:none;box-shadow:none">
+          <div class="qa-num">Concetto ${i+1} / ${s.qa.length}</div>
+          <div class="qa-q">${qa.q}</div>
+          <div class="qa-ans-wrap"><span class="qa-check">✅</span><span class="qa-ans-text">${qa.a}</span></div>
+          <div class="qa-exp">${qa.e}</div>
+          <button class="mark-read-btn${read?' done':''}" id="rbtn_${s.id}_${i}" onclick="event.stopPropagation();_secToggleRead(${s.id},${i})">
+            ${read?'✓ Studiata':'○ Segna come studiata'}
+          </button>
+        </div>`;
+      });
+    }
+    h+=`</div></div>`;
   });
   h+='</div>';
   document.getElementById('screen-sezioni').innerHTML=h;
+}
+
+function _secToggle(sid){
+  if(_secOpen.has(sid)) _secOpen.delete(sid); else _secOpen.add(sid);
+  renderSezioni(document.querySelector('.search-input')?document.querySelector('.search-input').value:'');
+}
+
+function _secToggleRead(sid,qi){
+  if(!store['r_'+sid]) store['r_'+sid]={};
+  store['r_'+sid][qi]=!store['r_'+sid][qi];
+  save();
+  const read=!!store['r_'+sid][qi];
+  const card=document.getElementById('qcard_'+sid+'_'+qi);
+  const btn=document.getElementById('rbtn_'+sid+'_'+qi);
+  if(card) card.className='qa-card'+(read?' read':'');
+  if(btn){btn.className='mark-read-btn'+(read?' done':'');btn.innerHTML=read?'✓ Studiata':'○ Segna come studiata';}
+  const p=secPct(sid);
+  const bar=document.getElementById('sbar_'+sid);
+  const pct=document.getElementById('spct_'+sid);
+  if(bar) bar.style.width=p+'%';
+  if(pct) pct.textContent=p+'%';
+  const doneS=SECTIONS.filter(s=>secPct(s.id)===100).length;
+  const ph=document.querySelector('#screen-sezioni .page-sub');
+  if(ph) ph.textContent=doneS+'/'+SECTIONS.length+' complete · '+totalRead()+'/'+totalQA()+' domande';
 }
 
 // ============================
@@ -1022,6 +1075,7 @@ function renderNumeri(){
   h+='</div>';
   document.getElementById('screen-numeri').innerHTML=h;
 }
+
 
 // ============================
 // INIT
